@@ -1,0 +1,193 @@
+[Auto-generated transcript. Edits may have been applied for clarity.]
+Now let's briefly review property basics. We'll begin with random variables.
+
+A discrete random variable is a type of random variable that can take on a countable number of distinct values.
+
+In other words, it's a variable that represents outcomes of random process, and these outcomes can be listed.
+
+An example of a binary random variable is an event.
+
+A Sally will be the US president in 2028, and the property of this event, A, is the fraction of possible worlds in which A is true.
+
+Universe. U is the event space of all possible worlds, hence its area is one, and so the property of U is one.
+
+Since the total prompt U of all possible outcomes in a sample space is one, and if event A has a prompt U of occurring equal to property of A,
+
+then the rest of the probability which is what is left over must be the chance that A doesn't happen.
+
+The axioms of probability are the foundational rules that form the basis of probability theory.
+
+These were first formalized by Andre Kolmogorov.
+
+All the probabilities are between 0 and 1.
+
+Valid propositions have prompt T1, and unsatisfiable propositions have prompted zero.
+
+The probability of a disjunction and the general case is given by the formula on the chart that translates to.
+
+If events A and B can both occur, then we must subtract overlap to avoid double counting.
+
+The probability of any event. Is never negative, as zero area would mean no world could ever have a true.
+
+The area of a can't get any bigger than one.
+
+An area of one would mean A is true and all positive worlds.
+
+Given the axioms outlined on the slide,
+
+an important theorem is that prompt you of an event a not occurring is equal to one minus prompt you of an event A occurring.
+
+Prior probability is a concept from Bayesian.
+
+Probability that represents our initial belief about the likelihood of any event before we see any new data or evidence.
+
+Joint probability is the probability that two or more events occur at the same time.
+
+If the joint probability of alarm and burglary as is depicted in the table, the prompt you of alarm going off and not going off,
+
+and the case of a burglary happening and not a burglary happening adds up to one.
+
+Marginalization and joint property refers to the process of summing out a variable.
+
+To get the property of another variable, regardless of the outcome of the one we eliminate.
+
+So if we have the joint product of two variables alarm and burglary,
+
+then marginal probability of burglary is found by summing over all possible values of alarm, which is 0.1.
+
+This gives us the probability of burglary regardless of what happens with alarm.
+
+A recipe for making a joint distribution of key variables is to make a truth table
+
+listing all combinations of values of our variables for each combination of values.
+
+We simply note in the table how probable it is.
+
+If he subscribed to the axioms of probability, all the numbers must sum to one.
+
+On the slide, all the combinations of values and the last column sum to one.
+
+To infer prior probabilities from the joint probabilities.
+
+We use a process called marginalization, which we briefly covered previously in this example.
+
+Given the joint probability of alarm and burglary, we want to find the prior probability of alarm and prior probability of burglary.
+
+Similar to what we did before, to infer probabilities be sum over the other variables values for alarm.
+
+We sum all the values in the solid red box, and for burglary we sum all the values and the dashed blue box.
+
+Conditional probability is to prompt you of an event given that another event has already occurred.
+
+If A and B are two events, the conditional probability of A given B is the probability that both A and B occur over the prompt you of B occurring.
+
+This intuition is that if you are narrowing the sample space to just cases where B has occurred,
+
+and then we are asking what fraction of those cases also satisfy A.
+
+In this example, given the values and the table, we are computing the conditional probability using explicit priors.
+
+For computing the probability of a burglary given an alarm probability of an alarm given a burglary,
+
+and the probability of both burglary and alarm occurring together.
+
+Please pay attention to the color coding in the table. We can also compute the conditional probability without explicitly computing priors.
+
+In this example, we're computing the property of a burglary.
+
+Given an alarm which is equal to alpha times the probability of a burglary and an alarm occurring together.
+
+Since the prompt of an alarm is equal to one or alpha,
+
+we can compute alpha which we can plug in to compute the probability of a burglary
+
+given an alarm and a property of not a burglary occurring given an alarm.
+
+Similarly, in another example, headaches are rare and flu is rarer.
+
+But if you're coming down with the flu, there's a 5050 chance you'll have a headache.
+
+In this example, we want to solve for the prompt U of headache and flu occurring together and to prompt U of a flu.
+
+Given a headache, we basically plug in the values in the equations on the top right and compute them.
+
+Bayes theorem as a fundamental result in prompted theory that describes how to update the prompt two
+
+of the hypotheses based on new evidence and the formula to prompt U of A given B is the posterior,
+
+which is what we want to find.
+
+The prompt u of be given A is the likelihood, which is the prompt U of observing B if A is true, the prompt u of A is the prior,
+
+the initial prompt u of A before seeing B, and the prompt u of B is the evidence,
+
+which is the total prompt U of observing B under all possible scenarios.
+
+Bayes theorem lets us revise a belief.
+
+Which is the prior after seeing new data.
+
+That is an evidence. Another way of thinking about Bayes rule is that the property of hypotheses,
+
+given evidence, is equal to probability of evidence given hypothesis times.
+
+To prompt you of hypotheses over the prompt, you have evidence.
+
+And this example. Given evidence of headache, we can solve the prompt to a flu given headache using the Bayes rule.
+
+Let's take a look at another example. Suppose there are two envelopes, one of which is the winning envelope that has a dollar and four beads in it.
+
+The other one is the losing envelope that has three beads but no money in it.
+
+The question is when someone draws an envelope at random and offers to sell it to you, how much would you pay?
+
+Before deciding you're allowed to see one bead drawn from the envelope.
+
+Suppose it is black. How much did you pay? Suppose it is red.
+
+How much did you pay? Let's consider each case.
+
+The probability of a black beat given the winning envelope is one half.
+
+The property of a black bead, given the losing envelope is two thirds.
+
+The property of choosing the winning envelope is one half.
+
+Using these probabilities,
+
+along with the fact that the prompt of winning unusual given a black beat plus the property of losing an envelope given a black beat is equal to one.
+
+You can compute alpha and to prompt your winning envelope.
+
+Given a black beat and a probability of losing envelope given a black beat.
+
+In statistics, independence refers to a situation where the occurrence of one event does not affect the prompt you of another.
+
+Formally, two events, A and B, are independent.
+
+If the probability that both A and B happen is the product of their individual probabilities.
+
+Another way to express that is knowing that one event occurred doesn't change the probability of the other.
+
+Let's look at an example. Given the values included in the table is smart, independent of study.
+
+Let's compute the probability of both study and smart occurring together, which is the values in the first column of the table.
+
+So add 0.432 and 0.048 which makes 0.48.
+
+Let's also compute the individual probabilities of study and smart, which are 0.6 and 0.8 respectively.
+
+Since the probability that both study and smart happen is the product of their individual probabilities, which is 0.48, the answer is yes.
+
+Smart is independent of study. We have already reviewed to absolute independence of events A and B two.
+
+Events A and B are conditionally independent given event C, if you know C, learning about A gives us no extra information about B and vice versa.
+
+This lets us decompose the joint distribution.
+
+Conditional independence is weaker than absolute independence.
+
+However, it is still useful and decomposing the full joint.
+
+This concludes our review of Property Basics, which we will frequently encounter in the upcoming lectures.
+

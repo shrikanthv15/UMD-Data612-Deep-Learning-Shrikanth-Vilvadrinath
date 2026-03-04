@@ -1,0 +1,279 @@
+[Auto-generated transcript. Edits may have been applied for clarity.]
+In this lecture we will review another multi-class classification algorithm, namely Support Vector Machines SVM in short.
+
+SVM is a powerful supervised learning algorithm used primarily for classification.
+
+It aims to find the best decision boundary that separates classes with the maximum margin.
+
+Why is SVM? While its effective and high dimensional spaces, it works well when number of features is greater than number of samples.
+
+It is robust to overfitting due to maximizing margin, and it is flexible through kernels to handle non-linear data.
+
+To better match notation used in SVMs and to make matrix formulas simpler, we will drop using superscripts for the ith instance.
+
+Given training instances X along with true label y model parameters theta and hyperplane theta transpose x.
+
+The decision function h of x is sine theta transpose x.
+
+The sine function plays a key role in SVM predictions.
+
+The sine function turns the continuous score of H of x into class prediction.
+
+If x is greater than zero. Sine is one.
+
+If x is equal to zero, sign is zero, and if x is less than zero, sine is minus one.
+
+In classical hard margin SVM, the algorithm tries to find a perfect separating hyperplane that divides the two
+
+classes without any misclassifications and maximizes the margin between them.
+
+However, in many real world problems, data is not perfectly separable, and so classes overlap or have noise forcing.
+
+Perfect separation may lead to no solution or a very narrow margin which causes poor generalization.
+
+Well, the salt margin, which is also known as fat separators.
+
+SVM allows some misclassifications or violations of the margin to achieve better generalization.
+
+In other words, fat separators allow the decision boundary to be less strict.
+
+In summary,
+
+we maximize the margin and SVM because it reduces capacity and overfitting generalizes better and leads to a convex optimization problem with unique,
+
+globally optimal solutions. We call the logistic regression objective function with two components cost zero and cost one.
+
+The intuition is that if y is one, we want h of x be approximately one and theta transpose x be greater than or equal to zero.
+
+If y is zero, you want h of x be zero and theta transpose x be less than or equal to zero.
+
+Unlike logistic regression, which uses log loss, SVM uses hinge loss to measure how well a model classifies training.
+
+Examples. It encourages not only correct classification,
+
+but also margin of confidence by penalizing points that are inside the margin or misclassified in the graph.
+
+The thin blue line is the logistic regression loss, which decreases smoothly and is always positive.
+
+It penalizes misclassifications more gradually, making it probabilistic in nature.
+
+Whereas SVM hinge loss, which is depicted in a thick red line into a graph, has a sharp cutoff.
+
+If the margin is greater than one, the loss becomes zero, otherwise it increases linearly with error.
+
+This shows why SVMs enforce a hard margin.
+
+While logistic regression allows for softer property based penalties.
+
+When we use a hinge loss plus regularization in SVM,
+
+it is mathematically very close to logistic regression using log loss plus regularization in the equation for SVM.
+
+You can think of C as similar to one over lambda.
+
+Here's another graphical representation of the SVM parameters and margins.
+
+The central black line is the decision boundary where theta transpose x is zero.
+
+Points on the line are classified as uncertain.
+
+The other two black lines are the margins. Theta transpose x one is the margin bound view for the positive class.
+
+Theta transpose x minus one is the margin boundary for the negative class.
+
+The area between the two outer black lines is the margin gap, which SVM tries to maximize.
+
+Support vectors, which are two plus signs and one minus sign, lie exactly on these lines.
+
+The distance between the two outer black lines is the margin width given by two over theta.
+
+The distance from a point to a line is a key geometric concept in SVM.
+
+In the figure, the dashed line perpendicular to the line is the shortest distance between the point and the line.
+
+The formula for the distance d from the point x0,
+
+y0 to a line a x plus b y plus c equals to zero is d equals AX0 plus BY0 plus c or square root of a square plus b square.
+
+So the SVM margin is nothing more than the perpendicular distance between two parallel lines.
+
+And the distance formula is what gives us the neat result.
+
+Two over tater. The dual problem in SVM is central to how we actually solve it in practice.
+
+The primal SVM problem was given as equation on the slide.
+
+The dual formulation is often easier to solve, especially with quadratic problem solvers.
+
+So instead of optimizing directly over theta and b in the primal problem,
+
+we optimize all Lagrangian multipliers alpha and a dual problem which introduces kernels,
+
+focuses on support vectors, and makes computational feasible.
+
+If the data are not linearly separable, a simple hard margin SVM won't work.
+
+SVM handles this in two ways. One soft margin SVM.
+
+In this case, we introduce slack variables that allow some points to fall inside the margin, or even on the wrong side of the boundary.
+
+Here, in this case, the optimization problem takes a new form, as denoted on the slide where c is the regularization parameter.
+
+Large T penalizes misclassifications heavily, and small C allows more violations.
+
+Two kernel trick. Sometimes no straight line and input space can separate the data.
+
+SVM solves this by mapping data to a higher dimensional space using kernels where a linear separation is possible.
+
+SVM need dot product between data points and a dual problem.
+
+Instead of computing the dot product in the original input space,
+
+we can first map the data to a higher dimensional feature space via a transformation Phi of x.
+
+Suppose we use a kernel for two d input x.
+
+This corresponds to mapping phi of XI1XI2 presented in this slide.
+
+Rather than running SVM on x I.
+
+We run it on phi of x I. What if phi of x I is really big?
+
+We can use kernels to compute it implicitly. In this case we don't need to explicitly compute phi of x I.
+
+We only compute the kernel, which behaves as the mapped data into a higher dimensional space, and then took the dot product.
+
+This lets SVM build nonlinear decision boundaries and original input space, while still solving a problem that looks linear in feature space.
+
+Given x I and x j. Consider the function on the slide.
+
+Let's compute the kernel directly by expanding the square.
+
+This corresponds to mapping to two the input vectors x I and x j into a 3D feature space where phi of x I and phi of x j are as denoted on the slide,
+
+so that k of x I x j is equal to phi of x dot product phi of x j.
+
+The polynomial kernel of degree two corresponds to including all quadratic terms of the input variables.
+
+Instead of computing the quadratic features explicitly.
+
+We just compute the kernel function k of x I x j.
+
+The polynomial kernel in this case is equivalent to mapping 2D inputs into a 3D feature space,
+
+with features where a linear separator in 3D corresponds to a quadratic decision boundary and the original 2D input space.
+
+One of the use cases for this trick that is useful is visual pattern recognition.
+
+In summary, given an algorithm which is formulated in terms of a positive definite kernel k one,
+
+one can construct an alternative algorithm by replacing k1 with another positive definite kernel k2, and this is what we call the kernel trick.
+
+Recall the SVM dual problem. The dual optimization problem for span is presented with the first equation on the slide.
+
+Notice that the data only appear through dot products.
+
+If you map inputs into new space y phi of x, the dual becomes as it appears in the second equation.
+
+Hence, instead of explicitly computing theta of x, we use a kernel function by which the dual problem becomes as it appears in the second equation.
+
+The Gaussian kernel, also known as the RBF kernel,
+
+is defined as in the equation where x I and x j are two input vectors and the numerator is the squared Euclidean distance,
+
+and the denominator is the parameter that controls the kernel width.
+
+The intuition is such that k of x I x j measures similarity between x I and x j, and if x and x j are very close,
+
+the numerator becomes approximately zero and the kernel becomes approximately one,
+
+whereas if x, I and j are far apart, the numerator becomes very large while the kernel becomes approximately zero.
+
+So the Gaussian kernel says two points are similar if they are close and Euclidean distance.
+
+On the slide, we observed three cases where the parameter varies between point five and three, and the first graph where the parameter is 0.5.
+
+The kernel is very narrow with a sharp peak, and the similarity drops quickly.
+
+In the second graph, the kernel is moderately wide, and the third graph, the kernel is broad and even distant points are considered similar.
+
+This shows how the kernel with sigma square controls how local or global dissimilarity measure is.
+
+Let's work on a Gaussian kernel example.
+
+Suppose we've learned that the theta zero, one, two and three values are -0.5, one, one, and zero respectively.
+
+We predict one if the function yields a value greater than or equal to zero.
+
+For x1, you have the kernel set to one and other similarities are set to zero.
+
+Plugging in the values, the function yields 0.5, which is greater than or equal to zero.
+
+So if you predict one for x2, if you have the kernel set to one and other similarities are set to zero.
+
+Plugging in the values, the function yields -0.5, which is less than zero, so we predict minus one.
+
+The figure shows a rough sketch of the decision surface.
+
+We'll share a demo on visualizing the SVM on polynomial kernels on albums.
+
+For an application of the Gaussian kernel.
+
+Leland and his collaborators describe a method for automatically retouching face photos in their 2008 paper,
+
+instead of correcting a photo with generic filters.
+
+The system analyzes a database of attractive faces to identify an underlying facial structure, then suddenly morphs the input face towards this ideal.
+
+SVMs are very powerful, but can be tricky in practice.
+
+Let's go over some key considerations one by one before applying SVMs effectively.
+
+First off, SVMs are distance based models.
+
+If one feature has a larger numeric range than the others, it will dominate the decision boundary.
+
+To prevent that, always standardize or normalize your data before training.
+
+Second, SVMs can learn linear or non-linear boundaries depending on the kernel used.
+
+So start with RBF and tune the kernel parameters using cross-validation.
+
+Third, SVMs perform well on moderate feature space.
+
+However, too many irrelevant features may yield overfitting, and two feed features may yield underfitting.
+
+To prevent this, use dimensionality reduction techniques like PCA.
+
+Forth. If one class has far more samples than another, SVM may be biased toward the majority class.
+
+To prevent this, perform over sampling or under sampling.
+
+And finally, SVM training is computationally expensive, especially for large datasets.
+
+Memory can become a bottleneck. To overcome this, use linear SVC or stochastic SVM implementations.
+
+Many SVM packages already have multi-class classification built in.
+
+Otherwise, use one versus Rest technique.
+
+Here's a quick comparison of SVM versus logistic regression for multi-class classification.
+
+These recommendations come from and review based on the number of training examples and the number of features.
+
+In summary, SVMs are effective in high dimensional space,
+
+and the kernel method allows SVM to learn nonlinear decision boundaries without explicitly transforming data to high dimensions.
+
+SVMs are robust to overfitting, and they work well for clear margin of separation and error.
+
+Memory efficient. However, they are computationally expensive and their performance heavily depends on kernel selection and hyperparameter tuning.
+
+They are harder to interpret and not well suited for overlapping classes.
+
+In addition, they are sensitive to outliers.
+
+This concludes the review of classification models in ML.
+
+We will introduce neural networks in the next lecture.
+

@@ -1,0 +1,93 @@
+[Auto-generated transcript. Edits may have been applied for clarity.]
+In this lecture we will review linear algebra, particularly scalars,
+
+vectors and matrices over various vector and matrix operations, and cover the benefits of vectorization over iterative computation.
+
+What is a vector? A vector is a quantity that has both magnitude and direction.
+
+A vector in d dimensional real space is an ordered set of d real numbers.
+
+The vector of 1634 can be written as either column vector or row vector, depending on the context.
+
+An m by n matrix is an object with m rows and and columns, where each entry is a real number.
+
+The example shown on the slide is a three by three matrix.
+
+To transpose of a vector or matrix is an operation that flips it over its main diagonal.
+
+Essentially, swapping rows with columns for matrix A to transpose is written as A to the T,
+
+and if A is an m by n matrix, its transpose is an n by n matrix.
+
+The LP norm of a vector is a way to measure the length or size of that vector.
+
+Generalized for different values of p, as p increases, the norm becomes more sensitive to the largest components.
+
+Common norms include L1 and L2 norms.
+
+The L1 norm of a vector is the sum of the absolute values of its components.
+
+It's also called the Manhattan norm or taxicab norm, because it's like measuring distance by moving along grid lines, like navigating city blocks.
+
+Hence, the L1 norm measures total movement regardless of direction, which is used in sparse optimization, lasso regression, and signal processing.
+
+The L2 norm of a vector is the most common way to measure the length or magnitude of a vector,
+
+also known as the Euclidean norm, it is like the straight line distance from the origin to the point X in Euclidean space.
+
+The L2 norm is widely used for measuring errors and machine learning.
+
+The dot product, also called the scalar product, is an operation that takes two vectors and returns a single number as scalar.
+
+Essentially, it measures how much one vector goes in the direction of another.
+
+The dot product of a vector with itself is the square of its length or norm.
+
+The matrix product, or matrix multiplication is an operation where we multiply two matrices to get a new matrix into operation.
+
+The elements of the ith row of A, with the corresponding elements of the jth column of B are multiplied, and then some together.
+
+The inner product is a way to multiply two vectors and to get a single number, a scalar.
+
+If the dot product is positive, the vectors point roughly in the same direction.
+
+If it is zero, the vectors are orthogonal. If it is negative, the vectors point in opposite directions.
+
+The outer product of two vectors is an operation that produces a matrix from those vectors.
+
+Given two vectors of U of science two by one and v of size one by two is a two by two matrix.
+
+Vectorization and deep learning means performing operations on entire vectors,
+
+matrices, or tensors all at once, rather than looping over individual elements.
+
+Which brings a number of key benefits such as speed and efficiency.
+
+Cleaner. Simpler code. Better use of hardware scalability and memory optimization.
+
+Suppose you want to write our model H of X in vectorized form.
+
+All we need to do is compute the dot product, which is a weighted sum of the input features.
+
+Hence, if we have an x vector of t features and theta vector of t parameters, the output vector h of x is a scalar.
+
+Similarly, if you have a matrix of inputs shape n by d and theta vector of d parameters,
+
+the output vector h of x is of shape n by one containing predictions for all n examples at once, without needing to loop a unit.
+
+Vector is a vector that has a magnitude or length of one.
+
+It is often used to indicate direction only without regard to magnitude.
+
+A symmetric matrix is a square matrix that is equal to its transpose.
+
+This means that the element in the ith row and jth column is equal to the element in the jth row and i'th column.
+
+An orthogonal matrix is a square matrix whose rows and columns are orthogonal vectors.
+
+Vectors. Matrices and their operations are essential to truly grasp how deep learning works under the hood.
+
+In fact, deep learning is fundamentally linear algebra on arrays and numbers,
+
+and these arrays are vectors, matrices, and tensors in higher dimensions.
+
