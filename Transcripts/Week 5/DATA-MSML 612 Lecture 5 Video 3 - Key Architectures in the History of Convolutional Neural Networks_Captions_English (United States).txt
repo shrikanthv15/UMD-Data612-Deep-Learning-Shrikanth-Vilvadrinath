@@ -1,0 +1,203 @@
+[Auto-generated transcript. Edits may have been applied for clarity.]
+In this lecture, we will review the history of convolutional neural networks and present some classic architectures.
+
+The mNIST dataset was introduced in 1998 by LeCun.
+
+Over time, error rates got dramatically lower as models improved.
+
+Take a look at the transition from traditional ML algorithms to deep neural networks, to CNN's, and how the error rates go down over time.
+
+And the table on the slide. In the synchronous session, you will design and implement a CNN for mNIST dataset.
+
+You will also develop a solution using a feedforward artificial neural network,
+
+and compare their performance scores to see how one performs with respect to the other.
+
+You will use both TensorFlow and Keras as well as PyTorch frameworks for the implementation.
+
+Let's keep this exercise for the synchronous session. CNNs perform well on the Cifar ten dataset.
+
+Let's keep in mind that the Cifar ten dataset is a harder dataset than mNIST, because images are color of size 32 by 32.
+
+Include ten natural object classes and contain high intra class variation.
+
+All the early models struggled. CNNs now achieve over 99% accuracy on Cifar ten.
+
+With modern architectures and augmentation. Progress came from architectural innovations, optimization improvements, and data augmentation.
+
+Cifar ten is considered sold by modern CNNs and Transformers.
+
+The Cifar ten data set is one of the most widely used benchmark datasets in computer vision and deep learning.
+
+It is designed for image classification and has been used for evaluating and comparing CNN architectures for over a decade.
+
+Now let's talk about some key architectures and history of CNN's LeNet.
+
+Five is one of the earliest and most influential convolutional neural network architectures,
+
+developed by Yann LeCun in 1998 for handwritten digit recognition.
+
+It was used to classify digits from the mNIST like bank data set.
+
+Learn that five is a seven layer CNN consisting of convolutional layers, subsampling layers, and fully connected layers.
+
+It uses ten activation functions. Keep in mind, value wasn't used in 1998.
+
+One at five achieved state of the art performance at the time on handwritten digit recognition,
+
+especially for bank check digit classification, which was its real world application.
+
+One at five achieved about 0.8% test error.
+
+This was groundbreaking in 1998 because there were no GPUs, no value, no batch normalization, and no deep modern architectures.
+
+Many competitors were using SVMs.
+
+Cannon and statistical methods. LeNet five was among the first deep learning models to outperform classical machine learning methods.
+
+We will implement learn at five using various deep learning frameworks including Keras and TensorFlow and PyTorch and the synchronous session.
+
+AlexNet is one of the most influential neural network architectures in deep learning history.
+
+It revolutionized computer vision and kicked off the modern deep learning era by winning the 2012 ImageNet Large Scale Visual Recognition Challenge,
+
+with a massive improvement over the previous state of the art.
+
+It is developed by Alex Key, Ilya Cover, and Geoffrey Hinton.
+
+AlexNet has eight learnable layers, including five convolutional layers and three fully connected layers,
+
+and it takes an RGB image of size 224 by 224 by three as input.
+
+Key ideas AlexNet introduced include value activation functions, GPU training,
+
+data augmentation, dropout, overlapping, max pooling, and local response normalization.
+
+It achieved a top five error of 15.3% versus the previous best of 26.2%.
+
+This huge leap showed that deep CNNs could outperform hand-crafted computer vision features when trained on GPUs.
+
+We will implement AlexNet with both Keras and TensorFlow, as well as PyTorch frameworks and the synchronization.
+
+VGG is a family of deep convolutional neural networks developed by the Visual Geometry Group at the University of Oxford.
+
+VGG demonstrated that stacking many small three by three convolutions dramatically improved performance and image recognition.
+
+The two most famous versions are Vgg16 and VGG 19, which were developed in 2014.
+
+Vgg16 architecture uses an RGB image of 224 by 224 as input,
+
+followed by five blocks of layers where each block contains two subsequent convolutional layers followed by a max pooling layer.
+
+The number of filters used in each block doubles by size added, moves forward, and the network.
+
+The three layers before the last softmax layer are fully connected with 4096 units each.
+
+VGG 19 was one of the top performance and ImageNet Large Scale Visual Recognition Challenge in 2014.
+
+It achieved top five error of approximately 8% and top one error of approximately 26%.
+
+Similar to other architectures we presented. We will implement VGG with various deep learning frameworks in the synchronous session.
+
+Inception version three is a deep convolutional neural network architecture doped by Google in 2015.
+
+It's part of the inception family, also known as GoogLeNet.
+
+It defined the original Inception Version one design and introduced several important innovations that improved accuracy and computational efficiency.
+
+Inception version three is a 48 layer deep CNN designed to increase network width and depth without increasing competition too much.
+
+It factorizes convolutions to make them cheaper, uses multiple receptive field sizes in parallel,
+
+and improves training with techniques like auxiliary classifiers and batch normalization.
+
+It's often used in image classification, feature extraction, and transfer learning.
+
+Inception version one was a major breakthrough,
+
+but it had specific limitations that motivated the refinement and later inception versions, mainly in version three.
+
+Instead of choosing one kernel size arbitrarily, inception version one used many filters in parallel.
+
+Using smaller kernels and inception networks and modern CNN in general has several advantages.
+
+One. Smaller kernels require fewer computations than larger ones.
+
+Two stacking small kernels introduces more activations, leading to better representation.
+
+Three smaller kernel yields fewer parameters, causing last chance of overfitting.
+
+Four due to the smaller gradients daily to easier training, and five what parallel small kernels, multi-scale feature extraction becomes cheaper.
+
+Inception version three achieved 3.5% top five error on ImageNet,
+
+performing near state of the art while being more efficient than similarly deep networks.
+
+We will review a few inception version three implementations using various deep learning frameworks and a synchronous session.
+
+ResNet stands for Residual Network Edits,
+
+a groundbreaking deep convolutional neural network architecture introduced by Kaming, Hare and collaborators.
+
+It won the ImageNet Large Scale Visual Recognition Challenge in 2015.
+
+Deep CNNs before ResNet struggled to train beyond 20 to 30 layers due to vanishing and exploding gradients.
+
+ResNet introduces skip connections and identity shortcuts that let gradients bypass one or more layers,
+
+making hundreds or even thousand layers trainable.
+
+The key idea is that instead of learning a direct mapping, layers learn a residual function.
+
+The difference between a plain network and a residual network comes down to the use of skip connections,
+
+and it has a huge impact on how gradients flow and how deep networks are trained.
+
+And very deep networks like ResNet 50. The number of channels and intermediate layers can become very large.
+
+Using a standard three by three convolution with a large number of channels is computationally expensive.
+
+To solve this, ResNet uses a bottleneck residual block which compresses and then restores the number of channels.
+
+ResNet achieved state of the art results on ImageNet and other benchmarks in 2015,
+
+dramatically improving over previous CNN architectures like VGG and Google.
+
+Net. Let's keep in mind ResNet 152 is significantly deeper than VGG, despite being deeper.
+
+Training was easier due to residual connections on ImageNet, ResNet 152 achieved 5.7% top five error.
+
+On the slide. The trend shows deeper networks with smart architecture design significantly improve image net performance.
+
+People also receive ResNet implementation using various deep learning frameworks and a synchronous session.
+
+To review of the performance of various CNN architectures.
+
+Let's look at the figure on the slide.
+
+Giga operations refers to the total number of multiply add operations required for a single forward pass through the network.
+
+It is a proxy for computational cost, meaning the higher g ops, the more compute and so slower.
+
+Inference comparing top one accuracy versus giga operations shows the accuracy efficiency tradeoff.
+
+A key insight from this figure is that modern CNN design focuses on maximizing accuracy for operation, rather than road depth.
+
+T distributed stochastic neighbor embedding is a dimensionality reduction technique for visualizing high dimensional data in 2D or 3D.
+
+It is commonly used to visualize embeddings learned by neural networks or images.
+
+Suppose we trained a CNN on mNIST. We can extract a feature vector from the last hidden layer instead of raw pixels.
+
+Applying t-SNE to these embeddings produces better separation between digit clusters.
+
+Fashion. mNIST dataset contains 28 by 28 grayscale images of clothing items.
+
+Hence each image is a 784 dimensional vector.
+
+t-SNE can reduce this. 784 D data to 2D data to visualize class clusters as presented on the slide.
+
+Understanding these classic CNN architectures builds a foundation for modern deep learning research and applications,
+
+which is what we will learn and build in this course.
+

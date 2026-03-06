@@ -1,0 +1,20 @@
+# Dependencies for DiT-Based Anomaly Detection
+# Install: pip install -r requirements.txt
+# Tested with Python 3.10+ on Google Colab Free (T4) and Kaggle (P100)
+
+torch>=2.0
+torchvision>=0.15
+numpy
+Pillow
+scikit-learn
+scikit-image
+matplotlib
+seaborn
+tqdm
+pytorch-msssim
+lpips
+tifffile
+scipy
+tabulate
+timm
+einops

@@ -10,7 +10,15 @@
       "Bash(cd:*)",
       "Bash(python:*)",
       "mcp__plugin_context7_context7__resolve-library-id",
-      "mcp__plugin_context7_context7__query-docs"
+      "mcp__plugin_context7_context7__query-docs",
+      "Bash(echo EXIT: $?:*)",
+      "Bash(echo CODE DIFF: $?:*)",
+      "Bash(echo TEX DIFF: $?:*)",
+      "Bash(LC_ALL=C grep:*)",
+      "Bash(conda activate:*)",
+      "Bash(mv:*)",
+      "Bash(pip list:*)",
+      "Bash(xargs:*)"
     ]
   }
 }
