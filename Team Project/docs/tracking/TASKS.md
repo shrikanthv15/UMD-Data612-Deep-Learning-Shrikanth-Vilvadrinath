@@ -10,8 +10,8 @@ Legend: `AGENT` = AI can execute | `HUMAN` = requires human | `DONE` / `TODO` / 
 | ID | Task | Type | Status | Depends On |
 |----|------|------|--------|------------|
 | P0-01 | Download MVTec AD dataset | HUMAN | DONE | -- |
-| P0-02 | Create requirements.txt | AGENT | TODO | -- |
-| P0-03 | Write MVTec Dataset class (dataset.py) | AGENT | TODO | P0-02 |
+| P0-02 | Create requirements.txt | AGENT | DONE | -- |
+| P0-03 | Write MVTec Dataset class (dataset.py) | AGENT | DONE | P0-02 |
 | P0-04 | Set up shared Google Drive | HUMAN | TODO | -- |
 | P0-05 | Set up GitHub repo | HUMAN | TODO | -- |
 | P0-06 | Verify Colab Free T4 + AMP | HUMAN | TODO | P0-02 |
@@ -31,18 +31,18 @@ Legend: `AGENT` = AI can execute | `HUMAN` = requires human | `DONE` / `TODO` / 
 
 | ID | Task | Type | Status | Depends On |
 |----|------|------|--------|------------|
-| P2-01 | Implement cosine noise schedule | AGENT | TODO | P0-02 |
-| P2-02 | Implement forward process q(x_t|x_0) | AGENT | TODO | P2-01 |
-| P2-03 | Implement DiT backbone | AGENT | TODO | P0-02 |
-| P2-04 | Implement DDIM reverse sampling | AGENT | TODO | P2-01 |
-| P2-05 | Add data augmentations to Dataset | AGENT | TODO | P0-03 |
-| P2-06 | Implement training loop with AMP | AGENT | TODO | P2-02, P2-03 |
+| P2-01 | Implement cosine noise schedule | AGENT | DONE | P0-02 |
+| P2-02 | Implement forward process q(x_t|x_0) | AGENT | DONE | P2-01 |
+| P2-03 | Implement DiT backbone | AGENT | DONE | P0-02 |
+| P2-04 | Implement DDIM reverse sampling | AGENT | DONE | P2-01 |
+| P2-05 | Add data augmentations to Dataset | AGENT | DONE | P0-03 |
+| P2-06 | Implement training loop with AMP | AGENT | DONE | P2-02, P2-03 |
 | P2-07 | Smoke test: 5 epochs on hazelnut | HUMAN | TODO | P2-06, P0-01 |
-| P2-08 | Implement reconstruction inference | AGENT | TODO | P2-04 |
-| P2-09 | Implement SSIM pixel anomaly map | AGENT | TODO | P2-08 |
-| P2-10 | Implement ResNet-18 feature anomaly map | AGENT | TODO | P2-08 |
-| P2-11 | Implement combined scoring + AUROC eval | AGENT | TODO | P2-09, P2-10 |
-| P2-12 | Implement 6-panel visualization | AGENT | TODO | P2-11 |
+| P2-08 | Implement reconstruction inference | AGENT | DONE | P2-04 |
+| P2-09 | Implement SSIM pixel anomaly map | AGENT | DONE | P2-08 |
+| P2-10 | Implement ResNet-18 feature anomaly map | AGENT | DONE | P2-08 |
+| P2-11 | Implement combined scoring + AUROC eval | AGENT | DONE | P2-09, P2-10 |
+| P2-12 | Implement 6-panel visualization | AGENT | DONE | P2-11 |
 | P2-13 | Full training on hazelnut (100 epochs) | HUMAN | TODO | P2-07 |
 | P2-14 | Evaluate hazelnut: AUROC + visual maps | HUMAN | TODO | P2-11, P2-13 |
 

@@ -8,6 +8,37 @@
 
 ---
 
+## Log Entry 006 — Full Core Implementation Complete
+**Date:** 2026-03-06
+**Status:** All Phase 2 AGENT tasks done — ready for GPU smoke test
+
+### What Was Created
+Complete codebase implementing DiT-based anomaly detection pipeline:
+
+| File | Tasks | Description |
+|------|-------|-------------|
+| `code/requirements.txt` | P0-02 | 16 dependencies (PyTorch, timm, einops, pytorch-msssim, etc.) |
+| `code/src/dataset.py` | P0-03, P2-05 | MVTecDataset class with train/test splits, augmentations |
+| `code/src/diffusion.py` | P2-01, P2-02, P2-04, P2-08 | Cosine schedule, forward process, DDIM reverse, reconstruct() |
+| `code/src/dit.py` | P2-03 | DiT-S (33M params) and DiT-Tiny (4.4M) with AdaLN-Zero |
+| `code/src/train.py` | P2-06 | Training loop: AMP, warmup+cosine LR, gradient clipping, checkpoints |
+| `code/src/scoring.py` | P2-09, P2-10, P2-11 | SSIM pixel maps + ResNet-18 feature maps + combined scoring |
+| `code/src/evaluate.py` | P2-11 | Per-category and all-category AUROC evaluation |
+| `code/src/visualize.py` | P2-12 | 6-panel figure generator |
+
+### Verification
+All 7 modules pass CPU smoke tests:
+- `dataset.py`: loads categories, constructs transforms
+- `diffusion.py`: cosine betas verified (alpha_bar[0]≈1, alpha_bar[999]≈0)
+- `dit.py`: DiT-S output shape (2,3,128,128) matches input, no NaN
+- `scoring.py`: feature extractor produces (B,1,128,128) maps
+- `visualize.py`: generates and saves 6-panel PNG
+
+### Next
+P2-07: Smoke test on Colab T4 (5 epochs hazelnut). Then Phase 3 baselines.
+
+---
+
 ## Log Entry 005 — Proposal Draft Written
 **Date:** 2026-03-05
 **Status:** P1-05 DONE — proposal ready for Overleaf compilation
