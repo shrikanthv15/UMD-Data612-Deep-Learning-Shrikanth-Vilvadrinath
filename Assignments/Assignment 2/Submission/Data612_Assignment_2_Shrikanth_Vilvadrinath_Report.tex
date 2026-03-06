@@ -1,0 +1,389 @@
+\documentclass[12pt,a4paper]{article}
+
+% ─── Packages ────────────────────────────────────────────────────────────────
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{amsmath}
+\usepackage{hyperref}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{float}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{parskip}      % space between paragraphs, no indent
+\usepackage{microtype}
+\usepackage{lmodern}
+
+% ─── Code listing style ───────────────────────────────────────────────────────
+\lstset{
+  basicstyle=\ttfamily\small,
+  backgroundcolor=\color{gray!10},
+  frame=single,
+  breaklines=true,
+  columns=fullflexible,
+  keepspaces=true,
+}
+
+% ─── Hyperlink colours ────────────────────────────────────────────────────────
+\hypersetup{
+  colorlinks=true,
+  linkcolor=blue!60!black,
+  urlcolor=blue!60!black,
+  citecolor=blue!60!black,
+}
+
+% ─── Title ───────────────────────────────────────────────────────────────────
+\title{%
+  \textbf{Assignment 2 --- IMDB Sentiment Classification with CNNs}\\[6pt]
+  \large DATA-MSML 612 --- Deep Learning\\
+  University of Maryland
+}
+\author{Shrikanth Vilvadrinath}
+\date{March 6, 2026}
+
+% ─────────────────────────────────────────────────────────────────────────────
+\begin{document}
+\maketitle
+\tableofcontents
+\newpage
+
+% =============================================================================
+\section{Introduction}
+% =============================================================================
+
+This report presents a comparative study of three model families for binary sentiment
+classification on the IMDB movie-review dataset: Logistic Regression (LR), a Feed-Forward
+Neural Network (FFNN), and a Convolutional Neural Network (CNN). We additionally
+investigate the effect of stopword removal on CNN performance. The target accuracy
+threshold throughout is \textbf{>85\%}.
+
+The results reveal a nuanced performance landscape: the FFNN slightly outperforms the CNN
+in test accuracy (86.50\% vs.\ 85.57\%), which is counter-intuitive given the CNN's richer
+inductive bias. Both neural models exhibit significant overfitting, which the analysis
+examines in depth. All three primary models clear the 85\% threshold.
+
+\textbf{Framework:} TensorFlow 2.10 / Keras. \textbf{Seed:} 42 (fully reproducible).
+
+% =============================================================================
+\section{Dataset}
+% =============================================================================
+
+The IMDB dataset \cite{maas2011} contains \textbf{50,000 movie reviews} split evenly as
+25,000 for training and 25,000 for testing. Labels are binary (1 = positive, 0 = negative).
+The dataset is perfectly balanced: 12,500 positive and 12,500 negative examples in each
+split.
+
+\begin{quote}
+\textit{Note on the assignment description:} The assignment text states ``50,000 reviews
+for training and the same amount again for testing.'' The actual Keras IMDB dataset
+provides \textbf{25,000 training and 25,000 test reviews (50,000 total)}. The numbers
+used here reflect the actual dataset.
+\end{quote}
+
+\subsection*{Preprocessing}
+\begin{itemize}
+  \item Vocabulary limited to the top \textbf{5,000} most frequent words
+        (\texttt{NUM\_WORDS=5000}; rarer words replaced with the \texttt{$<$UNK$>$} token).
+  \item Reviews padded/truncated to \textbf{500 tokens} (\texttt{MAX\_LEN=500}) using
+        pre-padding (zeros prepended to short reviews; long reviews truncated from the
+        left).
+  \item Raw review length statistics: min = 7, max = 2,494, mean = 234.8, median = 176.0.
+\end{itemize}
+
+\subsection*{Sample Decoded Review}
+To illustrate the preprocessing pipeline, training review 0 (Positive label) decodes as:
+
+\begin{quote}
+\textit{``this film was just brilliant casting location scenery story direction
+everyone's really suited the part they played and you could just imagine being there
+robert redford's is an amazing actor\ldots''}
+\end{quote}
+
+Reviews are stored as integer word-rank sequences and decoded back via the IMDB word
+index. The model sees integer tokens, not raw text.
+
+% =============================================================================
+\section{Models and Architecture}
+% =============================================================================
+
+\subsection{Logistic Regression (Baseline)}
+
+\textbf{Input:} Multi-hot binary bag-of-words (BoW) vectors of shape
+$(25{,}000,\ 5{,}000)$. Position $i$ is 1 if word-ID $i$ appears in the review, 0
+otherwise.
+
+Using raw padded integer sequences as LR input is semantically incorrect: word-rank 42
+would be treated as twice as important as word-rank 21, which is meaningless. Multi-hot
+BoW is the standard representation for linear text classification.
+
+\begin{lstlisting}[caption={Bag-of-Words encoding}]
+def to_multi_hot(sequences, num_words):
+    result = np.zeros((len(sequences), num_words), dtype=np.float32)
+    for i, seq in enumerate(sequences):
+        indices = seq[seq > 0]              # skip padding
+        indices = indices[indices < num_words]
+        result[i, indices] = 1.0
+    return result
+\end{lstlisting}
+
+\subsection{Feed-Forward Neural Network (Baseline)}
+
+\begin{lstlisting}[caption={FFNN architecture}]
+Embedding(5000, 32, input_length=500)  ->  (batch, 500, 32)
+Flatten()                              ->  (batch, 16000)
+Dense(250, activation='relu')          ->  (batch, 250)
+Dense(1,   activation='sigmoid')       ->  (batch, 1)
+# Total parameters: 4,160,501
+\end{lstlisting}
+
+The FFNN uses a \emph{learned} Embedding layer, giving it representation-learning
+capability. This is standard practice for neural text classification and provides a
+meaningful comparison point before adding convolutional layers. The model learns
+distributed word representations jointly with the classification head.
+
+\subsection{Convolutional Neural Network (CNN)}
+
+\begin{lstlisting}[caption={CNN architecture with dimension walkthrough}]
+Embedding(5000, 32, input_length=500)          -> (batch, 500, 32)
+Conv1D(32, kernel_size=7, activation='relu')   -> (batch, 494, 32) [500-7+1=494]
+MaxPooling1D(pool_size=5)                      -> (batch,  98, 32) [floor(494/5)=98]
+Flatten()                                      -> (batch, 3136)    [98*32=3136]
+Dense(250, activation='relu')                  -> (batch, 250)
+Dense(1,   activation='sigmoid')               -> (batch, 1)
+# Total trainable parameters: 951,701
+\end{lstlisting}
+
+\textbf{Architecture rationale:}
+\begin{itemize}
+  \item \texttt{kernel\_size=7}: Captures 7-word n-gram patterns. A window of 7 is large
+        enough to cover sentiment negation phrases such as \textit{``not at all good''} or
+        \textit{``could not have been better''}.
+  \item \texttt{pool\_size=5}: Aggressive subsampling extracts the most salient feature
+        activations, reducing the temporal dimension $494 \to 98$.
+  \item \texttt{Dense(250)}: Standard-capacity classification head; 98\,$\times$\,32 = 3,136
+        flattened inputs provide sufficient signal.
+  \item \texttt{sigmoid} output with \texttt{binary\_crossentropy} loss for binary
+        classification.
+\end{itemize}
+
+\textbf{Compile:} \texttt{optimizer='adam'}, \texttt{loss='binary\_crossentropy'},
+\texttt{metrics=['accuracy']}.\\
+\textbf{Training:} 10 epochs, \texttt{batch\_size=128}, \texttt{validation\_split=0.2}
+(test set evaluated only once after training to avoid data leakage).
+
+% =============================================================================
+\section{Results}
+% =============================================================================
+
+All models trained with \texttt{SEED=42} (\texttt{random}, \texttt{numpy}, and
+\texttt{tensorflow} seeds all set). Table~\ref{tab:results} summarises the outcomes.
+
+\begin{table}[H]
+  \centering
+  \caption{Model accuracy results on IMDB dataset (SEED=42)}
+  \label{tab:results}
+  \begin{tabular}{lrrr}
+    \toprule
+    \textbf{Model} & \textbf{Train Acc} & \textbf{Test Acc} & \textbf{vs.\ 85\%} \\
+    \midrule
+    Logistic Regression (BoW)   & 95.82\% & 85.71\% & PASS +0.71\% \\
+    Feed-Forward NN (Embedding) & 97.40\% & 86.50\% & PASS +1.50\% \\
+    CNN                         & 97.34\% & 85.57\% & PASS +0.57\% \\
+    CNN (No Stopwords)          & 97.09\% & 84.80\% & FAIL $-$0.20\% \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\textbf{All three primary models exceed the 85\% accuracy target.}
+
+% =============================================================================
+\section{Analysis}
+% =============================================================================
+
+\subsection{Model Performance Hierarchy}
+
+Test accuracy ranking: \textbf{FFNN (86.50\%) $>$ LR (85.71\%) $>$ CNN (85.57\%)
+$>$ CNN-NS (84.80\%)}.
+
+The headline finding is that the FFNN outperforms the CNN. This is counter-intuitive given
+the CNN's richer inductive bias, and is examined in Section~\ref{sec:ffnn-vs-cnn}.
+
+\subsection{FFNN vs.\ CNN --- Why the Simpler Model Wins Here}
+\label{sec:ffnn-vs-cnn}
+
+The FFNN has \textbf{4.16 million parameters} versus the CNN's \textbf{951,701} ---
+roughly 4$\times$ more capacity. With 25,000 training examples, the FFNN's
+Embedding + Flatten path learns global word co-occurrence patterns across the entire
+500-token sequence simultaneously.
+
+\textbf{Training curve analysis} (Figures~\ref{fig:cnn-acc} and \ref{fig:cnn-loss}):
+
+Both models overfit significantly. The FFNN exhibits more extreme overfitting:
+\begin{itemize}
+  \item Training accuracy climbs to $\approx$99.99\% by epoch 10.
+  \item Validation accuracy plateaus at $\approx$85--86\%.
+  \item Training loss collapses to 0.0004 while \texttt{val\_loss} rises to 0.9988
+        (a 250$\times$ divergence).
+\end{itemize}
+The CNN overfits less severely (train 97.34\% vs.\ test 85.57\%, an 11.77\% gap), and
+its validation loss curve shows divergence from training loss starting around epoch 2--3.
+
+\textbf{Why CNNs typically dominate NLP:} Conv1D's advantage becomes pronounced with
+(1) longer sequences, (2) pre-trained embeddings (GloVe, BERT), or (3) scarce training
+data where parameter efficiency matters. For this specific dataset (25k samples,
+vocabulary 5k, sequences padded to 500), the FFNN's global token-position attention
+provides sufficient discriminative signal.
+
+\textbf{Recommended fix:} Adding \texttt{Dropout(0.3--0.5)} after \texttt{Dense(250)},
+or applying early stopping at epoch 5--7 based on validation loss, would reduce
+overfitting and likely close the performance gap between models.
+
+\subsection{Logistic Regression as a Strong Baseline}
+
+LR achieves \textbf{85.71\% test accuracy} --- only 0.79\% behind the FFNN and 0.14\%
+ahead of the CNN. This demonstrates that the IMDB task has strong lexical signal: explicit
+sentiment vocabulary (``excellent'', ``terrible'', ``masterpiece'', ``boring'') that a
+simple BoW representation can exploit without any learned representations.
+
+The 10.11\% train--test gap (95.82\% vs.\ 85.71\%) reflects overfitting despite sklearn's
+default L2 regularisation (\texttt{C=1.0}). Reducing \texttt{C} (e.g., \texttt{C=0.1})
+would likely close this gap.
+
+\subsection{Effect of Stopword Removal (Task 6)}
+
+Removing NLTK English stopwords reduces CNN test accuracy from \textbf{85.57\% to
+84.80\%}, a drop of \textbf{$-$0.77 percentage points}.
+
+\subsubsection*{The Negation Story}
+
+NLTK's English stopword list includes sentiment-critical negation words:
+
+\begin{quote}
+\textit{no, not, nor, couldn't, didn't, doesn't, hadn't,
+hasn't, haven't, isn't, mustn't, needn't, shouldn't, wasn't, weren't, won't,
+wouldn't} (17 of 20 common negation words; \textit{never}, \textit{neither},
+and \textit{cannot} are not in NLTK's stopword list)
+\end{quote}
+
+These are among the most powerful sentiment modifiers in natural language.
+
+\subsubsection*{Concrete Before/After Decode Example}
+
+Table~\ref{tab:decode} shows a training review (review \#5, Negative label) before
+and after stopword removal. Note how function words (``than'', ``it'', ``that'',
+``the'', ``all'', ``other'') are stripped alongside the structurally important
+``it's'' and ``those''.
+
+\begin{table}[H]
+  \centering
+  \caption{Stopword removal: before and after decode of a sample review (\#5)}
+  \label{tab:decode}
+  \begin{tabular}{p{1.5cm} p{11cm}}
+    \toprule
+    \textbf{Stage} & \textbf{First 20 decoded words} \\
+    \midrule
+    Before &
+      \texttt{begins better than it ends funny that the russian $<$UNK$>$ crew
+      $<$UNK$>$ all other actors it's like those scenes} \\
+    \addlinespace
+    After &
+      \texttt{begins better ends funny russian $<$UNK$>$ crew $<$UNK$>$ actors
+      like scenes documentary shots br br spoiler part message $<$UNK$>$} \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+When ``not'' precedes a positive phrase (\textit{``not a great film''} $\to$
+\textit{``great film''}) or ``never'' precedes a negative one (\textit{``never
+disappoints''} $\to$ \textit{``disappoints''}), the sentiment inverts. The CNN's 7-gram
+Conv1D filters learn these negation n-gram patterns as fixed-window features. Removing
+the negation token disrupts the n-gram and causes the filter to produce the wrong
+activation.
+
+The relatively small drop ($-$0.77\%) rather than a catastrophic collapse suggests:
+\begin{enumerate}
+  \item Many reviews use explicit sentiment vocabulary that does not rely on negation.
+  \item The CNN partially recovers from surrounding context.
+  \item Neutral stopwords (``the'', ``a'', ``is'') dominate the $\approx$111 removed
+        words per review, diluting the impact of the 17 negation words.
+\end{enumerate}
+
+% =============================================================================
+\section{Training Curves}
+% =============================================================================
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.90\textwidth]{output/task5_cnn_accuracy.png}
+  \caption{CNN training vs.\ validation accuracy per epoch. Both metrics are shown in
+           percentage (\%). The gap between training ($\approx$97\%) and validation
+           ($\approx$85\%) accuracy at epoch 10 indicates significant overfitting.}
+  \label{fig:cnn-acc}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.90\textwidth]{output/task5_cnn_loss.png}
+  \caption{CNN training vs.\ validation loss (binary cross-entropy) per epoch. Validation
+           loss begins rising after epoch 2--3 while training loss continues to drop ---
+           a classic overfitting signature.}
+  \label{fig:cnn-loss}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.90\textwidth]{output/task7_model_comparison.png}
+  \caption{Model comparison: grouped bar chart of training and test accuracy for all four
+           models. The horizontal dashed line marks the 85\% target. Value labels show
+           exact percentages. Note that all three primary models (LR, FFNN, CNN) clear the
+           85\% threshold; the CNN without stopwords falls marginally short.}
+  \label{fig:comparison}
+\end{figure}
+
+% =============================================================================
+\section{Conclusion}
+% =============================================================================
+
+All three primary models exceed the 85\% accuracy target on the IMDB test set:
+LR 85.71\%, FFNN 86.50\%, CNN 85.57\%. Key conclusions:
+
+\begin{enumerate}
+  \item \textbf{Bag-of-words LR is a competitive baseline} for sentiment
+        classification --- it actually outperforms the CNN by 0.14 percentage points
+        (85.71\% vs.\ 85.57\%), because the IMDB task has strong lexical signal that
+        a linear model can exploit directly.
+
+  \item \textbf{The FFNN outperforms the CNN} due to its 4$\times$ larger parameter
+        count and sufficient training data for global pattern learning. Both models
+        overfit heavily; Dropout or early stopping are the recommended remedies.
+
+  \item \textbf{Stopword removal hurts CNN accuracy ($-$0.77\%)} because NLTK
+        stopwords include 17 negation words that are critical for sentiment n-gram
+        patterns (e.g., \textit{``not good''}, \textit{``never disappoints''}).
+\end{enumerate}
+
+% =============================================================================
+\begin{thebibliography}{9}
+
+\bibitem{maas2011}
+  Maas, A.\,L., Daly, R.\,E., Pham, P.\,T., Huang, D., Ng, A.\,Y., and
+  Potts, C. (2011). \textit{Learning word vectors for sentiment analysis.}
+  Proceedings of ACL 2011, pp.\ 142--150.
+
+\bibitem{chollet2018}
+  Chollet, F. (2018). \textit{Deep Learning with Python.} Manning Publications.
+
+\bibitem{keras}
+  Keras documentation. \url{https://keras.io/api/layers/}
+
+\bibitem{nltk}
+  NLTK stopwords corpus. \url{https://www.nltk.org/}
+
+\end{thebibliography}
+
+\vspace{1em}
+\noindent\small\textit{Code: \texttt{Assignment 2/code/assignment2.py} \quad
+Output plots: \texttt{Assignment 2/output/}}
+
+\end{document}

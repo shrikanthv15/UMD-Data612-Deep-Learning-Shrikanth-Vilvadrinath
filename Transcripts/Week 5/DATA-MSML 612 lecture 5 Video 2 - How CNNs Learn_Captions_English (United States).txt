@@ -1,0 +1,165 @@
+[Auto-generated transcript. Edits may have been applied for clarity.]
+This lecture will focus on the learning process in CNNs.
+
+CNNs learn progressively more complex and abstract features as it goes deeper into the network.
+
+This process is called hierarchical feature learning, and it mirrors the way the human visual cortex processes visual information.
+
+We call the layer convolutional because the operation it performs is mathematically similar to the convolution of two signals and signal processing.
+
+Even though, strictly speaking, CNNs actually use cross-correlation rather than true convolution.
+
+The first few convolutional layers learn simple local patterns directly from raw pixels.
+
+These filters respond to edges, corners, color,
+
+and simple textures after two convolutional layers followed by a pooling layer, the receptive field of each neuron expands.
+
+These layers learn more complex structures built from low level edges, such as motifs and textures, repeated patterns, and simple object parts.
+
+After several convolution and pooling layer blocks, the learned features become highly abstract,
+
+yielding the learning of complete object parts, class specific patterns, and global spatial structure.
+
+After flattening the final feature maps, the fully connected layers integrate all high level features.
+
+The last layer computes logits, and the softmax converts them into probability across classes.
+
+The filter is nothing more than a small cube of numbers whose weights are learned.
+
+It slides over the image spatially, generating a feature map representing where the filters learned pattern or and the image.
+
+This operation is similar to how a biological neuron or local connectivity process is input.
+
+A biological neuron receives analog signals from many synaptic neurons.
+
+Performs weighted summation.
+
+Applies nonlinear transformation similar to an activation function in artificial neural networks, and carries information forward.
+
+The output of convolution is an activation map, which is a 28 by 28 sheet of neurons.
+
+Each is connected to a small region in the input, and all of them share parameters.
+
+Consider five, five by five by three convolutional filters operating on an input image of 32 by 32 by three.
+
+The convolution process is performed for each filter independently.
+
+Hence, with five filters, the convolutional layer would consist of neurons arranged in a 3D grid,
+
+and so there would be five different neurons, all looking at the same region and the input volume.
+
+A Deep Belief Network, also known as DPN,
+
+is an early deep learning architecture that learns layer wise hierarchical representation of data using generative models,
+
+typically stacking restricted Boltzmann machines RBM.
+
+In short, it learns to represent face images using multiple layers of latent features, each capturing increasingly abstract structure,
+
+such as in layer one, it learns edges, in layer two, it learns corners, contours of eyes, nose, and mouth.
+
+In layer three and above, it learns axial parts and identity structure.
+
+It does this using unsupervised, greedy, layer wise pre-training followed by supervised fine tuning.
+
+Input images are flattened into vectors as part of input representation.
+
+RBM one learns edges, gradients and micro features.
+
+RBM tool learns facial parts or auto parts depending on the input image.
+
+RBM three learns assemblies of parts and expressions in summary as illustrated in the slide.
+
+If the model is trained on four distinct classes such as cars, faces, motorbikes, and airplanes,
+
+the second layer learns shared features and object specific features, and the third layer learns more specific features.
+
+Obviously, optimization can give us an example input that causes the desired behavior.
+
+But why bother with that? Couldn't you just look through the data set, for example, that cause the desired behavior?
+
+It turns out that optimization approach can be powerful way to understand what a model is really looking for.
+
+Deep dream is a computer vision application that uses a CNN to find and enhance patterns in images via algorithmic period Dalia,
+
+thus creating a dream like appearance reminiscent of a psychedelic experience and the deliberately overprocessed images.
+
+Here is another example of a deep dream application.
+
+Now that you've learned there's operations in CNNs, let's work on a concrete, hands on exercise.
+
+Suppose you want to find out whether the image in the slide depicts Cartesian axes.
+
+You can achieve that by convolving to image with two filters, and applying a max pooling operation with a kernel width of two.
+
+Let's compute the output. First, let's calm all the filter with the first segment in blue and input image.
+
+The core numerical operation is a dot product followed by summing the elements which yields two.
+
+In the example for the very first element in the activation map.
+
+As we slide the filter to the right, convolving the filter with the second segment and blue, and the input image yields minus two.
+
+Now that the first row is complete, we slide the filter to the second row and input image and convolve it.
+
+What the third segment and blue, and the input image which yields minus one.
+
+We slide the filter on the second row to the right and convolve it with the final segment and the input image, which yields one.
+
+Now let's repeat the convolution operation on the same input image using the second filter,
+
+which yields the second matrix and the output of the filter box in the slide.
+
+If you perform max pooling on these two matrices, the result is a vector of two elements two and four, respectively.
+
+When people say CNNs are translation invariant by design,
+
+they mean a small shift of the input image produces only a small or no change in the network's output.
+
+However, to be precise, CNNs are not perfected translation invariant.
+
+Rather, they provide translation equivariance and approximate translation invariance through architectural features, as illustrated in the slide.
+
+CNNs detect patterns regardless of where they appear.
+
+This is the core reason CNN's are translation friendly.
+
+Now let's work on another concrete example. Given the CNN architecture, let's calculate the number of learned parameters per layer.
+
+We can populate the first and second columns using the architecture and the previous slide.
+
+The third column contains the activation size, which is a product of elements included in the activation shape.
+
+Need to compute learned parameters for each layer.
+
+Let's keep in mind no parameters are learned and input layer or end pooling layers.
+
+Because of what these layers do and how they operate.
+
+The input layer simply stores the pixel values of the image.
+
+It does not perform any computation and does not transform the data using weights.
+
+Pooling layers apply operations such as max pooling and average pooling, which do not involve any learnable weights.
+
+They simply downsample the feature maps in a fixed way.
+
+The number of learnable parameters in a convolutional layer is determined only by the filters in that layer.
+
+Let's consider the first convolutional layer. Since the filter size is five by five by three.
+
+We take their product, add one for bias, and multiply that with the number of filters, which is eight.
+
+This yields 6 or 8. The same approach is applied to the second convolutional layer, where we take the product of filter five by five by eight.
+
+Add one for bias multiplied by the number of filters, which yields 3216.
+
+Finally, to compute the number of learnable parameters in fully connected layer three,
+
+we basically multiply the number of neurons in the previous layer,
+
+which is 400, by the number of neurons in the current fully connected layer, which is 120, and add 124 bias to come up with 48,120.
+
+In this lecture, we discussed the learning process in CNNs and applied important concepts on various concrete examples.
+

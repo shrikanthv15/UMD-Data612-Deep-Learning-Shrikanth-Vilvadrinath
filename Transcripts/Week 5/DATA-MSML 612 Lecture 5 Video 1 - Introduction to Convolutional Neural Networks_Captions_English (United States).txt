@@ -1,0 +1,223 @@
+[Auto-generated transcript. Edits may have been applied for clarity.]
+In this lecture we will introduce convolutional Neural networks,
+
+which are also known as CNN's present various types of layers and these networks and pertinent operations performed in these layers.
+
+As we briefly mentioned in the previous lecture,
+
+layered representations in neural networks are achieved through the hierarchical transformation of data as it passes through multiple layers.
+
+Each layer learns progressively more abstract and complex features.
+
+Inputs to a convolutional neural network are presented on the slide, where grayscale images of 20 by 20 pixels are used.
+
+Each image contains a handwritten digit that is part of the well-known mNIST data set with ten classes.
+
+And destroy neural network X one through X.
+
+The input features are fed in the input layer, which are transformed and B encoded,
+
+each layer building increasingly abstract features that are learned automatically through training.
+
+Each neuron in the output layer generates a probability value for each class of handwritten digit zero through nine.
+
+Abstract visualization of the hidden layer is provided on the right.
+
+Suppose you use a 200 by 200 pixel image as an input to a multilayer perceptron NLP.
+
+In short, assuming each hidden layer has 40,000 units, how many parameters would that yield?
+
+Let's keep it simple and assume that there will be a single hidden layer and an output of
+
+ten classes given 40,000 inputs being fully connected to a hidden layer of 40,000 neurons,
+
+or 1.6 billion parameters would be learned.
+
+This number would double if the number of hidden layers becomes two, and so on.
+
+This translates to a vast of parameters computation, memory, and accuracy compared to using a convolutional neural network.
+
+This is because an MLP flattens a 2D image, turning a spatially meaningful pattern into a one dimensional sequence with no locality.
+
+So the MLPs must learn from scratch that neighboring pixels belong together.
+
+Whereas convolutional neural networks preserve the 2D structure naturally.
+
+Instead, if you used a convolutional neural network,
+
+the number of parameters would be dramatically reduced due to the fact that the same weights and the filter would be shared across the entire image.
+
+Additional advantages include local connectivity, translation, equivariance, less overfitting,
+
+and computational efficiency, which we will discuss in greater detail in the upcoming lectures.
+
+Stationarity in CNNs is one of the core reasons they work so well on images.
+
+Which means that the statistical properties of images do not depend on absolute position.
+
+In other words, edges, textures, coordinates and patterns look the same everywhere and image.
+
+In convolutional neural networks. Parameters are shared across locations through the use of filters that slide across the image.
+
+This mechanism is called weight sharing, and it is one of the key reasons CNNs are so efficient.
+
+Let's see how a filter is convolved or slid over a color image of size 32 by 32.
+
+Let's use a filter of size five by five by three.
+
+During the process, we take a dot product between the filter and a small chunk of the image at each sliding step.
+
+The total number of parameters learned on the entire image is five times five times three, plus one for bias, which totals 76.
+
+Here is an animation of how filter sliding takes place from left to right and top to bottom.
+
+The convolution process generates an output called an activation map, which is of size 28 by 28 by one.
+
+In this particular example,
+
+the convolution operation in CNNs is intentionally designed to mimic the behavior and structure of neurons in the visual cortex,
+
+especially local receptive fields. Edge detection, weight sharing, and hierarchical feature extraction.
+
+To compute the output of a convolution operation with the small kernel over an input image, you would perform elementwise multiplication and sum.
+
+Let's consider the convolutional three by three filter and slide that over the very first three by three segment of the input image.
+
+Due to the fact that there are only four elements where the values one.
+
+In both the filter and input image there are some equals four, yielding the very first element in pink in the activation map.
+
+If we add another green filter to the convolution operation.
+
+Another activation map of the same size is generated.
+
+If he had six of those filters of the same size, that would yield six activation maps of the same size.
+
+Stacking these six activation maps yields a new image of size 28 by 28 by six.
+
+Edge detection in classical image processing is typically performed using gradient
+
+based filters that highlight regions where pixel intensity changes sharply,
+
+among others. Sobel, Privett, Laplacian, and Cha are some of such filters used in edge detection.
+
+Instead, CNNs learn filters that often resemble some of these filters due to the fact that horizontal edges are detected and to image on the right.
+
+The relevant filter used for this operation would be the very first filter on the upper left corner of the slide.
+
+Consider a line drawing of a mouse. What would be an appropriate filter to learn given the curvy back of a mouse in the image?
+
+Keep in mind, although CNNs often call a convolution, the operation they perform is actually cross-correlation.
+
+Please pause the video here to go over the receptive field along with the filter
+
+and there element wise multiplication and summation at the bottom of the slide.
+
+Suppose you want to convolve a three by three filter over a seven by seven input.
+
+The default convolution operation at each time step is nothing more than sliding a filter over an input by one pixel to the right.
+
+Sliding the filter to the right by one pixel is also called a stride of one.
+
+Hence, the size of an activation map would be five by five.
+
+What if you don't use a stride of one but two?
+
+In this case, the filter would move to the right by two pixels.
+
+In either case, once the first row has been completed, the filter would move down by as many pixels is a stride.
+
+Therefore, convolving a filter of size three by three over an input of size seven by seven
+
+with stride of two would generate an activation map of size three by three.
+
+What if you use a strand of three with the same filter and input?
+
+Would that work? No, because after the second convolution step.
+
+The filter would be left with a single pixel which wouldn't fit.
+
+Can we formulate the process and compute the output size given the parameters of input and filter size and stride?
+
+Yes, you can calculate the output size according to formula and to slide.
+
+As it shows, stride of three doesn't generate an integer output size, meaning it doesn't fit.
+
+Now let's introduce another term in the convolution operation that is padding,
+
+which is a technique where we add extra pixels around the border of an input image before applying the convolution filter.
+
+Padding could help fit to filter what the input image size.
+
+It could also prevent shrinking the image size without a padding.
+
+A convolution operation reduces to image size zero pad border is the most common padding technique.
+
+Now let's perform convolution operations repeatedly, layer after layer with five by five filters over input image size 32 by 32 by three.
+
+The output size after the first convolution is 28 by 28 by six considering six filters,
+
+and 24 by 24 by ten considering ten filters after the second convolution.
+
+Hence, the output size shrinks by four pixels at each convolution layer.
+
+Let's consider an input image size of 56 by 56 by 64.
+
+If we apply a convolution on this image with a filter size of one by one by 64, the output would be 56 by 56 by one.
+
+Suppose we did the same operation with 32 filters, which would then generate an output size of 56 by 56 by 32.
+
+This means that a 64 dimensional dot product has been performed.
+
+Let's summarize convolution operations by formulating the output size using a number of parameters including filter size,
+
+input, image size, number of strides, and amount of padding.
+
+The output size equals input size minus filter size plus two times padding, divided by a number of strides plus one as shown on the slide.
+
+For common settings, use powers of two for the number of filters and an odd number of for filter science,
+
+such as one by 1 or 3 by 3 or 5 by five, etc.
+
+Let's keep in mind during convolution operation, layers are structured as matrices,
+
+not vectors, and large input matrices are convolved by small matrices called kernels.
+
+The kernels are the learned weights, and depending on padding and stride, the image may decrease slightly in size.
+
+By design, convolutional layers learn how to relate neighboring pixels.
+
+Another common layer type in convolutional neural networks is pooling layers,
+
+which are used to reduce spatial size, summarize local information, and improve robustness of feature maps.
+
+They play a critical role in making CNNs efficient and stable.
+
+Given the input size of 224 by 224 by 64, the output size of 112 by one,
+
+12 by 64 is produced, which is nothing more than downsampling of the original image.
+
+One of the common pooling operations is max pooling,
+
+which downsample feature maps while preserving the most important highest activations in each region.
+
+It reduces spatial dimensions but keeps the strongest feature responses a two by two max pool with a stride of two,
+
+or an input image of size 4x4 generates an activation map size of two by two.
+
+The idea is to choose the max pixel intensity value among the two by two segment and input image, and generate the first cell for the activation map.
+
+The process repeats by sliding to two by two a max pool or the entire input.
+
+Please pause the video here to practice the max pooling operation using the pixel values of the input image on the slide.
+
+Similar to max pooling.
+
+Average pooling is another common pooling operation, which basically averages to pixel intensity values within a particular segment of an input.
+
+To summarize the pooling operation and formulate the output size, we used three hyper parameters, including input image size, filter size, and stride.
+
+The output size equals input size minus filter size.
+
+Divide by stride plus one. In this lecture, we covered the foundation of convolutional Neural networks, which we will use throughout the course.
+
