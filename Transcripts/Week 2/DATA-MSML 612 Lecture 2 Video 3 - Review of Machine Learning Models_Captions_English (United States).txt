@@ -1,0 +1,243 @@
+[Auto-generated transcript. Edits may have been applied for clarity.]
+Let's review some of the main ML models, starting with linear regression and supervised learning.
+
+Regression is a type of problem where the goal is to predict a continuous output based on input features.
+
+To achieve this goal, the algorithm learns a mapping from input variables to a continuous target variable and linear regression.
+
+The goal is to find the best fitting line or hyperplane to predict the target variable y from input features x using the model.
+
+Hence, the hypothesis y is equal to theta zero and plus theta one times x1 plus theta two times x2 and plus theta d times x t.
+
+We define sum of squared errors as the sum of squared differences between the predicted and actual values.
+
+Minimizing the sum of squared errors is equivalent to finding the line or hyperplane,
+
+such that the vertical distances from the data points to the line are as small as possible, and squaring them penalizes larger errors more heavily.
+
+This is to discourage large deviations and linear regression.
+
+The cost function is a mathematical regression that quantifies how well the model's predictions match the actual data.
+
+It tells us how bad our model is at predicting the true values.
+
+The most commonly used cost function is the mean squared error,
+
+which computes the average squared difference between the predicted values and the actual values across all training examples.
+
+We minimize this cost to find the best fitting line or hyperplane and linear regression.
+
+Let's talk about the intuition behind cost function and linear regression.
+
+For insight on j function, let's assume x is a real number and theta is equal to theta zero and theta one into graph.
+
+On the left we have three red cross marks on the regression line indicating a perfect match or predicted with actual values.
+
+Hence theta one is one. In the right graph, the cost j of theta one is zero, where the theta one is one.
+
+Now we have a new regression line where theta one is 0.5.
+
+If you plug in the actual versus predicted values, we compute the cost as 0.58, the place disposition and the graph on the right.
+
+Lastly, we consider a regression line where theta one is zero that is on the x axis.
+
+If you plug in a new set of values, we get the cost as 2.33.
+
+We place the new cost value in the graph on the right, which yields the concave cost function.
+
+This concave cost function can be depicted in 3D.
+
+Let's consider a single parameter of size in square feet to predict a house price in thousand dollars.
+
+The graph on the left shows training data in red cross marks versus our current hypothesis, which is the blue line.
+
+The cost function for this hypothesis is depicted with a point on a contour line map.
+
+We can move towards the minimum by rotating the blue line, which is our current hypothesis.
+
+The lower the cost, the closer the location of the point towards the minimum.
+
+By rotating the blue line,
+
+we find the best regression line that yields the least sum of squared errors that places the point and the minimum on the contour line map.
+
+In gradient descent. The search procedure for finding the global minimum of the cost function involves iteratively updating theta to model parameters,
+
+and a direction that reduces the cost for linear regression.
+
+The cost function is convex, so it has one global minimum and gradient descent can find it and a procedure b initialize the parameters.
+
+Next we compute the gradient of the cost function. This tells us the direction and rate of change of the cost function.
+
+This is followed by updating the parameters. We basically move the parameters in the opposite direction of the gradient.
+
+We repeat the last two steps until convergence.
+
+As we mentioned earlier, gradient descent is an optimization algorithm used to minimize a cost function,
+
+which is also called a loss function by iteratively updating the model's parameters.
+
+These parameters are nothing more than a set of weights connecting neurons in subsequent layers.
+
+Let's see how this works. We begin with some initial guesses for the parameters.
+
+We compute the cost function of j of theta, which measures how well our model is performing.
+
+Next, we compute the gradient, which is the vector of partial derivatives of the cost function with respect to each parameter.
+
+This is the last term in the equation that is multiplied by the learning rate.
+
+Partial derivative of j of theta with respect to theta sub j.
+
+This tells us the direction of steepest increase. So we go and opposite direction to minimize.
+
+Finally, we update the parameters using the equation on the slide.
+
+In fact, this moves us from the higher point to a lower point and a curve toward the minimum.
+
+We repeat this process until the change in the cost function becomes very small, which is called convergence.
+
+The overall intuition is that each update moves the parameters slightly and a direction that decreases the cost function the most,
+
+gradually descending into value of the cost landscape to find a minimum.
+
+For linear regression, we compute the partial derivative of the cost function, which is the mean squared error with respect to each parameter.
+
+To achieve simultaneous updates in gradient descent,
+
+you must update all parameters at the same time using their gradient computed from the same iteration.
+
+This prevents any parameter from being updated with a value that was already modified during the current iteration.
+
+To ensure convergence and gradient descent using the L2 norm.
+
+Use it as a way to measure how close we are to the minimum, or to decide when to stop iterating.
+
+The L2 norm, also known as Euclidean distance, gives us a scalar value that reflects the magnitude of a vector.
+
+Going back to our house price prediction problem, our current hypothesis generates the blue regression line.
+
+Is this a good representation of the data and red cross marks on the left?
+
+No. Hence its reflection on the contour line map.
+
+On the right is the red cross mark, where the current value of the parameter is located, which is far from minimum.
+
+If we keep moving the parameters in the opposite direction of the steepest slope, we gradually descend towards the value of the cost landscape.
+
+We iteratively repeat this until it converges by finding the minimum, which is where the arrow points to.
+
+This yields the best fitting regression line shown in the figure on the left.
+
+Choosing the correct learning rate and gradient descent is crucial.
+
+It is one of the most important factors determining whether our model converges quickly, slowly, or not at all.
+
+The reason why the learning rate matters is because the learning rate controls how big each step is,
+
+and the direction of the negative gradient to small.
+
+A learning rate converges very slowly and may get stuck in local minima or flat regions.
+
+Too large a learning rate steps overshoot the minimum and can cause the algorithm to diverge or oscillate.
+
+It may also cause the cost function to fluctuate or increase just right, and learning rate balances speed and stability,
+
+causing the cost to decrease steadily toward the global yielding and efficient convergence.
+
+One of the main issues with gradient descent is that it can be slow on large data sets, because every update needs a full pass over all examples.
+
+In other words, per iteration, we need to compute the gradient or the entire data set, which may be costly.
+
+What is it computational complexity in terms of n given n number of training examples and m number of features?
+
+The time complexity of gradient descent, which is also known as batch gradient descent, is of m times n.
+
+There are different types of gradient descent. Stochastic gradient descent.
+
+SGD, in short, offers several key advantages over traditional batch gradient descent,
+
+especially when working with large data set or in real time applications.
+
+SGD updates the model parameters after every single training example, while batch gradient descent waits to process the entire data set.
+
+This means faster feedback and quicker iteration cycles.
+
+Because SGD takes noisy, small steps, it has a better chance of escaping local minima,
+
+avoiding saddle points and exploring a larger area of the cost surface.
+
+This can lead to better generalization and non-convex problems.
+
+In addition, the noise and SGD update introduces randomness that can act as a form of regularization, helping prevent overfitting.
+
+Mini batch.
+
+Gradient descent combines the best of both batch gradient descent and stochastic gradient descent, and is the most commonly used method in practice.
+
+Mini batch uses a small group of examples, so the gradient estimate is more accurate and the convergence path is less chaotic.
+
+This leads to a more stable descent and faster convergence overall.
+
+So far, we've considered a constant learning rate alpha and a time dependent learning rate alpha times T.
+
+Why our preset formula? Instead, Adagrad automatically scales the learning rate for each parameter individually.
+
+Parameters that receive large gradients get their learning rates decreased over time.
+
+Parameters with smaller sparse gradients get larger effective learning rates.
+
+Adagrad defines per feature learning rate by adjusting the learning rate for each
+
+parameter based on the historical sum of squared gradients for that specific parameter.
+
+As g sub t j goes over time from accumulated gradient magnitude to learning rate.
+
+For parameter theta sub j automatically shrinks into equation b.
+
+Add a small constant epsilon to prevent zero division.
+
+Adagrad converges quickly, and a bad choice of learning rate affects Adagrad less severely than it does gradient descent.
+
+Now let's briefly go over the linear basis function models.
+
+Linear basis function models are a class of models where the output is modeled as a linear combination of basis functions applied to the input.
+
+They are particularly useful for non linear regression or classification tasks because even though the model is linear in the parameters,
+
+it can still model non-linear relationships in the data.
+
+The key idea is that instead of modeling the target directly as a linear function of input x, we model it as a linear function of transformed inputs.
+
+Polynomial basis functions are one of the simplest and most common types of basis functions used in linear basis function models.
+
+They transform the input by raising it to different powers, allowing the model to capture polynomial relationships.
+
+Gaussian basis functions are a popular type of basis functions used in linear
+
+basis functions model to capture localized smooth non-linearities in data.
+
+Instead of using simple powers like polynomial basis functions, Gaussian basis functions use bell shaped curves centered at different positions.
+
+What Gaussian basis functions can approximate almost any smooth function if you use enough Gaussians?
+
+Sigmoidal basis functions are another type of non-linear basis functions used in linear basis function models.
+
+They use sigmoid shaped functions to transform inputs before applying a linear combination, allowing the model to capture nonlinear relationships.
+
+In this example, they fit a polynomial curve using a linear model.
+
+Even though a polynomial is nonlinear in its input x,
+
+we can represent it as a linear combination of nonlinear basis functions, denoted as y on the slides.
+
+This is a linear model and a weight theta. Though nonlinear in x.
+
+In summary, a linear model expresses the outputs h theta of x as a linear combination of basis functions phi j of x.
+
+Once the data is replaced by the outputs of the basis functions,
+
+fitting the generalized model is very much the same problem is fitting the basic model.
+
+We will utilize all these models and upcoming lectures and apply them in many problem settings.
+

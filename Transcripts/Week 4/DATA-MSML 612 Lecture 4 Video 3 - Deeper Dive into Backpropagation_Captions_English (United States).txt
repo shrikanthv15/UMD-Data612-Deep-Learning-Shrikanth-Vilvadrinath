@@ -1,0 +1,155 @@
+[Auto-generated transcript. Edits may have been applied for clarity.]
+In this lecture, you will dive deeper into backpropagation.
+
+The goal of learning and neural networks is to adjust weights to minimize the loss.
+
+Backpropagation uses the chain rule to distribute the error across the network.
+
+To achieve that, the gradient of the loss with respect to the output is computed,
+
+and each neuron in the previous layer gets a share of the error proportional to its connection weights.
+
+Discontinuous backward layer by layer.
+
+Hence to turn back propagation. Let's recall logistic regression cost function and apply it on a neural network with layers and multiple outputs.
+
+The cross-entropy loss for all examples and outputs is the first term in the equation.
+
+At the bottom of the slide,
+
+where y sub I k is the true label of example I for output k and h sub theta of x I is the predicted output from the last layer.
+
+Hence we're summing over all outputs k and all examples I.
+
+To prevent overfitting, we add L2 regularization, which is the second term and equation at the bottom of the slide,
+
+where theta is the weight connecting neurons and the subsequent layers, and lambda is the regularization parameter.
+
+This is the natural generalization of logistic regression.
+
+Cost to end L layer neural network.
+
+To optimize. You need to compute the gradients so that we can distribute error to all weights and biases according to chain rule.
+
+Let's consider a toy neural network example. Forward propagation is layer by layer computation.
+
+Each layer's output becomes the input to the next layer, and the output layer's activation depends on the task.
+
+All computations can be vectorized for efficiency.
+
+Backpropagation distributed the output error to all previous layers according to their contribution.
+
+Errors are multiplied by the local slope using the chain rule.
+
+Let's formulate the backpropagation and other toy neural network example.
+
+The output error is back propagated to hidden layer two and then hidden layer one.
+
+Using chain rule delta sub j to l means error of node j in layer L,
+
+which is computed by taking the partial derivative of cost function with respect to z of node j in layer L.
+
+The goal of learning is to minimize j theta over theta values.
+
+Gradient descent provides an iterative method to move theta into direction that decreases the cost fasters.
+
+Using the negative gradient and the box on the slide, alpha is the learning rate.
+
+Let's review this toy example which we saw before.
+
+Once the forward propagation complete error is computed for the output which is delta to the four equals eight to the four minus y.
+
+Now if you need to back propagate this error in a cascading fashion.
+
+First, let's backpropagate this error to the second neuron in layer three.
+
+The error for the second neuron, layer three, equals the weight connecting this neuron with the output,
+
+which is theta sub one two to the three times the output error, which is delta to the four times g sub two prime to the three.
+
+Now let's expand the last term g sub two prime to the three.
+
+This is derivative of activation for the current neuron which is the second neuron on layer three.
+
+Now let's backpropagate the output error to the first neuron in layer three.
+
+This time the error equals the weight connecting this neuron with the output,
+
+which is theta sub one one to the three times the output error, which is delta to the four times g sub one prime to the three.
+
+Same as before g sub one prime to the three is derivative of activation for the current neuron, which is the first neuron on layer three.
+
+Next, let's backpropagate the error to the second neuron in layer two.
+
+The error equals the weight connecting this neuron with the output,
+
+which is theta sub one two to the two times the error from the first neuron in layer three plus theta sub
+
+two two to the two times the error from the second neuron in layer three times g sub two prime to the two.
+
+Here g sub two prime to two is derivative of activation for the current neuron, which is the second neuron on layer two.
+
+If you would repeat the process for the first neuron in layer two.
+
+Now let's expand on the gradient computation of backpropagation.
+
+For the sake of simplicity, suppose we used sigmoid activation function.
+
+The derivative of the sigmoid with respect to its input is eight times one minus a.
+
+Hence, to compute the derivative of this activation, which is g prime z to the n which we previously denoted as just g prime,
+
+we take the element wise product of A with one minus a.
+
+For a concrete example, consider g prime z to the three.
+
+This is the derivative of activation in layer three.
+
+It equals to element wise product of activation output and one minus activation output in layer three.
+
+The same applies to the derivative of activation in layer two.
+
+Keep in mind if you don't backpropagate to the input layer.
+
+The slide present a pseudocode for backpropagation during training of a neural network.
+
+Once the gradients are initialized to zero for each training instance, activation error and gradients are computed outside the loop.
+
+The average regularized gradient is computed.
+
+In this slide, a pseudocode for gradient descent with backpropagation is presented given a training set with labels.
+
+The weights are randomly initialized, and for each training instance, activation error and gradients are computed.
+
+Upon computing the average regularized gradient,
+
+weights are iteratively updated in each epoch until they are converged or the maximum number of epochs is reached.
+
+In this slide, we see pseudocode for mini batch gradient descent.
+
+What backpropagation.
+
+The difference with the previous pseudocode is that instead of updating weights one per epoch, we update weights once per mini batch.
+
+In summary, during training of a neural net. Prediction and loss are computed and the forward pass and intermediate values are saved,
+
+and the backward pass gradients are computed using chain rule and error is propagated backward through all layers.
+
+With gradient descent, weights are updated to minimize error.
+
+Backpropagation is powerful, but it comes with several well-known issues and limitations.
+
+These problems affect training, stability, speed, and sometimes whether a network can learn at all.
+
+Among others, two main issues are local minima and black box.
+
+Neural networks have extremely complex loss surfaces, and so backprop may get stuck in local minima rather than finding the global minima.
+
+Also, the fact that neural networks learn internal representations doesn't mean we humans can easily interpret results.
+
+We will talk more about these issues and the way we can address them in the upcoming lectures.
+
+This concludes our discussion of backpropagation. Next we will go over some implementation details.
+
+Copyright 2026 University of Maryland Science Academy, All rights reserved.
+

@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(pdftotext:*)",
+      "Bash(conda --version 2>/dev/null && python --version 2>/dev/null)",
+      "Bash(conda.bat --version 2>/dev/null && python.exe --version 2>/dev/null)",
+      "Bash(grep data612:*)",
+      "Bash(/c/Users/shriv/anaconda3/Scripts/conda.exe env:*)",
+      "Bash(/c/Users/shriv/anaconda3/Scripts/conda.exe run:*)",
+      "Bash(cd:*)",
+      "Bash(python:*)",
+      "mcp__plugin_context7_context7__resolve-library-id",
+      "mcp__plugin_context7_context7__query-docs"
+    ]
+  }
+}

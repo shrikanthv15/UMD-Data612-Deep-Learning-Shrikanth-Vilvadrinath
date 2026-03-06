@@ -1,0 +1,39 @@
+[Auto-generated transcript. Edits may have been applied for clarity.]
+We've talked about a wide range of tasks, all of which are supervised learning.
+
+The power of DL goes beyond supervised learning, including unsupervised and reinforcement learning.
+
+In reinforcement learning, an agent learns to make decisions by interacting with an environment instead of learning from labeled data,
+
+like in supervised learning, the agent learns through trial and error, guided by rewards and penalties.
+
+Deep learning transformed reinforcement learning by taking it from toy problems to solving complex, high dimensional real world tasks.
+
+This fusion is called deep reinforcement learning. Similarly,
+
+DL has helped solve visual analogy problems using convolutional neural networks such as image A is to
+
+be as is to what deep learning has had a profound impact on unsupervised representation learning.
+
+Enabling models to learn useful high level features from raw data without labels.
+
+This shift was crucial because labeled data is expensive while unlabeled data is abundant.
+
+Disentangling texture from geometry is a key challenge in deep learning,
+
+especially for tasks like image synthesis, 3D reconstruction, style transfer, or face editing.
+
+DL models, particularly CNNs and generative models, have made significant progress in learning to separate these two factors of variation.
+
+Generative adversarial networks.
+
+Gans, in short, are a special class of deep learning models that trained through competition, not traditional supervised learning.
+
+They don't train deep learning models in general, but rather are themselves a way to train deep generative models.
+
+Gans train deep learning models by framing learning as a game between two neural networks, a generator and a discriminator.
+
+The generator learns to produce realistic outputs by trying to fool the discriminator, which in turn gets better at catching fakes.
+
+We'll provide several demos within the course's albums page to showcase some generative models.
+

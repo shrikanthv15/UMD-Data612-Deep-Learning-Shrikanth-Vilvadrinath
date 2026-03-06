@@ -1,0 +1,211 @@
+[Auto-generated transcript. Edits may have been applied for clarity.]
+In this lecture, we will go over some of the ways information is encoded inside of networks layers which we call representation,
+
+and explore how neural networks learn. Let's keep in mind.
+
+In neural networks, each layer takes the previous layer's output and transforms it into a new space
+
+where the structure of the data becomes easier for the network to work with.
+
+In this example, we will represent an end boolean function in a simple neural network.
+
+The inputs to the neuron are x1 and x2, along with a bias term of one.
+
+Their weights are 20, 20, and -30 respectively.
+
+In this setting, let's consider all four combinations of x1, x2 with the values of zero and one and compute h sub theta x.
+
+Given the weighted sums of -30, minus ten, minus ten and ten, and the outputs by the sigmoid activation function 0001 respectively,
+
+we can conclude that this is a correct representation of the n boolean function, because it outputs one only when both inputs are one.
+
+Similarly, we can represent other Boolean functions such as or not, and not x1 and not x2.
+
+As illustrated on the slide. In fact, we can combine representations to build a network that is more complex.
+
+As an exercise, please use the weights illustrated on the slide and verified the pertinent function representation on your own.
+
+Layered representations and neural networks are achieved through the hierarchical transformation of data as it passes through multiple layers.
+
+Each layer learns progressively more abstract and complex features.
+
+This hierarchical feature learning is one of the core reasons deep learning works so well.
+
+In this example, we used grayscale images of 20 by 20 pixels, where each image contains a handwritten digit.
+
+This is a part of the well-known mNIST dataset with ten classes.
+
+In this simple neural network. X1 through x, the input features are fed and the input layer which are transformed and re encoded in each layer.
+
+Building increasingly abstract features that are learned automatically through training.
+
+Each neuron and output layer generates a probability value for each class of handwritten digit zero through nine.
+
+To see this process in action.
+
+We'll share a demo of Yann LeCun LeNet, which is a convolutional neural network designed for handwritten character recognition on Elms.
+
+Neural networks are built to learn from examples. But what does learning really mean when we train a neural network?
+
+If you wanted to discover a function that maps inputs to the correct output,
+
+but the network does not know what the correct function is, it must learn it from data.
+
+To guide this learning, we need a clear and objective way to measure how well the model is performing.
+
+This is where the loss function comes in. When the network makes a prediction, they compare it to the ground truth.
+
+If they differ, that's an error. To quantify this error, we use a loss function which gives us a numerical measure of performance.
+
+But why and how to minimize loss?
+
+Lowering the loss directly corresponds to making better predictions, making theory mistakes, and capturing the structure and patterns in the data.
+
+To reduce loss, we need to update the parameters in directions that bring the loss down.
+
+Three matches are available for that. The first approach is random search that tries random parameter values and keeps the ones that reduce loss.
+
+In this approach, the initialize parameters randomly make small random adjustments to them.
+
+Keep the update if it reduces the loss, or discard it if it increases the loss.
+
+This is like blind trial and error.
+
+The second approach is numerical gradient, which approximates the gradient by measuring how the loss changes when we notch each parameter slightly.
+
+The third approach is analytical gradient, which computes a gradient exactly using calculus and the chain rule.
+
+In this approach, we perform a forward pass to compute outputs and loss.
+
+Apply the chain rule backwards through the network.
+
+Compute the partial derivative of the loss with respect to every parameter, and update parameters using gradient descent.
+
+All in all, giving a function f with respect to inputs x, labels y and parameters theta.
+
+If you want to compute gradient of loss with respect to theta, because the gradient tells us exactly how to change each parameter to reduce the loss.
+
+This is the core mechanism by which neural networks learn.
+
+Backpropagation is the core learning algorithm used to train neural networks.
+
+It efficiently computes how the loss changes with respect to every weight in the network,
+
+allowing gradient descent to update the parameters and reduce the error in the forward pass.
+
+Input values are propagated forward through the network.
+
+Outputs are computed and losses calculated.
+
+In the backward pass. The loss gradient is propagated backward using the chain rule.
+
+Partial derivatives are computed layer by layer, and for every weight and bias gradients are calculated.
+
+Keep in mind and naive approach would require recomputing large parts of the network.
+
+Many times backpropagation avoids redundancy by storing intermediate values from the forward pass,
+
+reusing them in the backward pass, and computing all gradients and time proportional to one forward pass.
+
+This makes deep learning feasible. Modularity in the forward propagation process breaks the neural network into small, reusable,
+
+interpretable components, which is one of the most important ideas in deep learning.
+
+It comes directly from the idea of compound functions,
+
+where the network is built from many simple functions connected together with modularity, complex functions become easier to compute.
+
+Overall, modularity provides simplified computation, reuse of intermediate variables,
+
+efficient backpropagation, easy implementation and better debugging, and efficient optimization and memory use.
+
+In the example, the compound function, which is a loss function, is broken down into smaller intermediate functions,
+
+which simplifies the forward propagation, makes it easier to compute the loss in a neural network.
+
+Forward propagation computes the output by applying the network's layers one by one.
+
+In this process, each layer's output becomes the input to the next layer.
+
+While doing so, pre activation and post activation intermediate variables are stored.
+
+These values are essential for computing gradients during backpropagation,
+
+which computes the gradient of the loss with respect to each intermediate variable, each weight, and each bias using the chain rule.
+
+All in all, backpropagation moves from output to input, reversing the forward process.
+
+The chain rule and neural networks is the fundamental mathematical tool that makes backpropagation possible.
+
+It allows us to compute how changes and weight affect the final loss by breaking a complex function into simpler parts.
+
+The key chain rule intuition is that the overall slope of the composite function
+
+equals the slope of the outer function times the slope of the inner function,
+
+hence slopes multiply. Suppose we have inputs of x and y and the first intermediate variable of z.
+
+In order for us to compute the gradients, which are the partial derivative of loss with respect to x and y,
+
+we first need to compute the partial derivative of loss with respect to the first intermediate variable z,
+
+and then compute the partial derivative of the first intermediate variable z with respect to x and y separately.
+
+Hence, each input gets its own gradient contribution by multiplying the incoming gradient
+
+by the slope of the local function with respect to that input concrete d.
+
+The partial derivative of loss with respect to x is equal to.
+
+Partial derivative of loss with respect to z times.
+
+Partial derivative of z with respect to x. Using chain rule.
+
+Use the same chain rule to compute the partial derivative loss with respect to y.
+
+Let's apply the chain rule to circuit intuition.
+
+Suppose we have two input values of minus two and five for x and y respectively, to an intermediate add function of two, which yields three.
+
+Subsequent D supposed to output of q function along with the value of z, which is minus four, is fed into the next multiply function f.
+
+The output would be -12.
+
+If you want to calculate the gradients, you would compute the partial derivative of f with respect to x, y, and z using chain rule.
+
+Given the intermediate functions provided in the slide, the partial derivative of q with respect to x and y would be one,
+
+and partial derivative of f with respect to q and z would be z and q, respectively.
+
+Using chain rule, the partial derivative of f with respect to x and y would be z.
+
+In the synchronous session, you will initialize and neural network and implement forward and backward propagation.
+
+Let's briefly go over matrix calculus before we get into backpropagation.
+
+When we take the derivative of a scalar function with respect to a vector, the result is a vector.
+
+When we take the derivative of a vector valued function with respect to a vector,
+
+the result is a Jacobian matrix, which is the foundation of backpropagation and all differentiable computation.
+
+This matrix describes how changing each input affects each output.
+
+When a scalar function depends on a matrix, its derivative with respect to that matrix is a matrix of the same shape.
+
+Activation gradient tells us how sensitive the output of a neuron is to its input.
+
+Partial derivative of G with respect to H captures how changes in activation affect the post activation.
+
+The diagonal matrix encodes independence between neurons.
+
+Off diagonal zeros mean Z does not affect h j for each eye that is not equal to J.
+
+Also, the diagonal matrix enables efficient element wise backpropagation.
+
+Let's take a break here.
+
+In the next lecture, we will continue our discussion on the learning process and neural networks and dive deeper into backpropagation.
+
+Copyright 2026 University of Maryland Science Academy, All rights reserved.
+

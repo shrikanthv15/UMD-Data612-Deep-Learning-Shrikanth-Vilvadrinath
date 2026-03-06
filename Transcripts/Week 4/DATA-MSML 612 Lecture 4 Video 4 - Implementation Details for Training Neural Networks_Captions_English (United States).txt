@@ -1,0 +1,107 @@
+[Auto-generated transcript. Edits may have been applied for clarity.]
+In this lecture, we will discuss some of the implementation details that may yield a more stable,
+
+accurate and efficient training process for neural networks.
+
+Data pre-processing, especially normalization and standardization, is critical in neural network training.
+
+These steps directly affect how fast a network learns, how stable training becomes, and how well the model generalizes.
+
+Normalization prevents large values from dominating the gradient, keeps inputs, and the sensitive region of activation functions,
+
+improves convergence speed, create smoother loss surfaces, and reduces the risk of exploding or vanishing gradient.
+
+Similarly, standardization helps layers like batch norm and layer norm more effectively and keeps the optimization landscape isotropic,
+
+making gradient descent smoother. Whitening is a pre-processing technique used before training and neural network to make the input data uncorrelated,
+
+then equal invariance across all dimensions.
+
+It goes beyond normalization and standardization by removing dependencies between features.
+
+Let's keep in mind. Neural networks consist of layers of neurons with weights and biases.
+
+If weights are initialized poorly, the network may fail to learn or learn very slowly or converge to poor solutions.
+
+If all neurons in a layer start with the same weight, they compute the same output for every input.
+
+During backprop, they will get the same gradient, so all weights remain identical.
+
+As a result, all neurons in the layer learn the same features.
+
+Defeating the purpose of having multiple neurons, whereas random weights break symmetry, so each neuron can learn different features.
+
+Now the question becomes how do we randomly initialized numbers?
+
+And the first idea that comes to mind is using small numbers.
+
+Is this a good idea? Let's consider this. This may work okay for some small networks, but would this approach scale with deeper networks?
+
+If not, what may be the issue?
+
+Using arbitrarily small random numbers is not considered good practice because they may cause each neurons output to become zero,
+
+leading to vanishing activations and gradient. This means that the network is no longer able to learn.
+
+Instead, we should use variance preserving initialization, which we will talk more about in the upcoming lectures and the synchronous session.
+
+You will implement random initialization and a neural network.
+
+Let's go over some of the other key implementation details.
+
+Compressing all parameters of a neural network into single vector theta provides a simpler and unified mathematical view.
+
+In gradient descent, a key idea is that every update to the parameters should move downhill on the loss surface.
+
+Hence, at each step there, find that j theta decreases.
+
+Implementing a gradient checking procedure is a good practice.
+
+The idea is to estimate gradients numerically for verification purposes.
+
+Once confirmed, it can be turned off. The verification could be in the form of checking if the new g theta is less than the old j theta.
+
+Otherwise, the learning rate could be too high or the gradient could be noisy.
+
+It's important to implement backprop to compute d vec, which is the gradient of the loss with respect to all parameters.
+
+Implementing numerical gradient checking to compute approximate gradients is also important.
+
+This way we can compare d vec with approximate gradients to see if they are similar.
+
+Next, we can turn off gradient checking and use backprop code for learning.
+
+In summary, here is a list of implementation steps for training a neural network.
+
+One. Randomly initialized weights by following a variance preserving approach to implement forward propagation to get the prediction.
+
+Three. Implement code to compute the cost function.
+
+Four. Implement backprop to compute the gradients.
+
+Five. Use gradient checking if the numbers align while.
+
+Disable the code for gradient checking and. Six.
+
+Use gradient descent with backprop to fit the network.
+
+To interactively experiment with various parameters and hyperparameters of a neural network on classification and regression tasks.
+
+You will share a link on albums before we wrap up this lecture.
+
+Let's remember and multilayer perceptron is a special case of a feedforward
+
+neural network where every layer is fully connected to the subsequent layer.
+
+The figures on the slide present both neural networks side by side.
+
+In the synchronous session, we will implement a multi-layer perceptron for classification and regression tasks.
+
+This concludes our discussion of implementation details for the neural network training process.
+
+In the next lecture, you will gently introduce convolutional Neural networks,
+
+which are widely used wherever data has a spatial grid like structure, most commonly images, but also audio, video and other structured signals.
+
+Copyright 2026 University of Maryland Science Academy, All rights reserved.
+

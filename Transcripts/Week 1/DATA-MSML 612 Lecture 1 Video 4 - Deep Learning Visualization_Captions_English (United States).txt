@@ -1,0 +1,49 @@
+[Auto-generated transcript. Edits may have been applied for clarity.]
+Deep learning. Specifically, convolutional neural networks process images through a sequence of layers,
+
+gradually transforming the raw pixel data into high level abstract features that are useful for tasks like classification, detection, or segmentation.
+
+An input raw image is fed into the model where pixel values are normalized.
+
+These layers in the network apply filters that slide across the image to detect patterns.
+
+Suppose our model is trained on four classes cars, faces, motorbikes, and airplanes, and earlier layers.
+
+Low level local features such as edges and corners are extracted in the middle layers.
+
+Mid-level patterns like object parts, contours, and motifs are learned, and the deep layers.
+
+High level abstract features such as faces, wheels, and logos are learned.
+
+The final layers are aware. The model extract semantic class specific patterns such as car versus face versus motorbikes versus airplanes.
+
+Features. The output layer generates the final output for the task, such as the probabilities of each class.
+
+Suppose we feed an image of a cat to our convolutional neural network and neuron, and the middle layer might fire strongly in the region of the eye.
+
+Another neuron might fire for the texture. Together, the network encodes the presence of a cat across many such activations.
+
+Guided backpropagation is a visualization technique in deep learning use to understand which parts of an input image.
+
+Influence and model's prediction. Some widely used datasets for computer vision tasks include mNIST and fashion mNIST.
+
+mNIST stands for Modified National Institute of Standards and Technology,
+
+and the dataset includes 60,000 images for training and 10,000 images for testing.
+
+The dataset contains images of handwritten digits zero through nine, where each grayscale image is of size 28 by 28 pixels.
+
+Fashion, mNIST is a drop in replacement for the original mNIST digit data set,
+
+but instead of handwritten digits, it contains images of clothing items.
+
+It was introduced by Zalando Research to offer a more challenging benchmark for image classification.
+
+These two data sets, and mNIST and fashion mNIST,
+
+are among the most common starting points for training and testing image based deep learning models, especially convolutional neural networks.
+
+We will use these data sets to learn CNN basics, test new architectures, benchmark algorithms quickly, and compare results across studies.
+
+You'll also have a number of coding assignments in which you will utilize these datasets.
+

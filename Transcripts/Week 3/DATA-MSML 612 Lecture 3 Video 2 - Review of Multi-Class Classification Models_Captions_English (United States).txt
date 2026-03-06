@@ -1,0 +1,157 @@
+[Auto-generated transcript. Edits may have been applied for clarity.]
+In this lecture we will review some of the multi-class classification algorithms.
+
+Multi-Class classification is a type of supervised learning, where the goal is to assign an input to one of three or more distinct classes.
+
+This is different from binary classification, where the goal is to assign each input to one of two possible classes.
+
+Image classification is such a task where it can be applied to binary or multi-class classification.
+
+Disease diagnosis. To classify whether a person is healthy or has cold or flu or pneumonia is an example to multiclass classification.
+
+Given training data independent and identically distributed from distribution D.
+
+If you want to find a function that outputs correct labels.
+
+Let's review some of the ways we can identify such a function.
+
+To start. Consider this question.
+
+Can we treat a multi-class classification problem as a regression problem and just predict a real number, then rounded to get the class?
+
+This is not a good idea even for binary classification, because regression does not model probabilities.
+
+Distances aren't meaningful and boundaries are poor.
+
+Let's look at two cases on the chart. The left plot shows data from two classes, denoted by red crosses and blue circles,
+
+together with the decision boundaries found by least squares and logistic regression model,
+
+and a solid magenta line and a dashed green line, respectively.
+
+The right hand plot shows the corresponding results obtained when extra data points are added at the bottom left,
+
+showing that least squares is highly sensitive to outliers.
+
+Unlike logistic regression. Another approach is one versus the rest.
+
+This strategy turns a multi-class classification problem into multiple binary classification problems, one for each class.
+
+This is a simple and effective way to extend binary classifiers like logistic regression or support vector machines, to handle multi class tasks.
+
+The idea is that if you have k classes, we train k binary classifiers where each classifier learns to separate one class from all the others.
+
+For class one out of K classes. The classifier labels it as positive and all others negative.
+
+If we repeat the same process by all classifiers, we end up having k classes.
+
+However, with this approach, some points may belong to multiple classes.
+
+This is depicted in the figure where the green shaded region is unknown.
+
+One versus one is another approach for multi-class classification,
+
+where a separate binary classifier is trained for every pair of classes for each classifier.
+
+You only use training examples from the two classes being compared, and b ignore all other classes.
+
+In this case, the total number of classifiers is k times k minus one over two.
+
+Each classifier basically decides whether this class is class A or B.
+
+The problem with this approach is that it is computationally expensive, and it may yield an ambiguous region.
+
+This is depicted in the figure where the green shaded region is unknown.
+
+And that approach to multi-class classification is using a discrimination function or discriminant function,
+
+which is a function that assigns a score to each class given an input.
+
+The model then predicts the class with the highest score.
+
+Given input x and k classes labeled as y.
+
+The classifier uses a set of discriminant functions where each function returns a real valued score for class K.
+
+This approach is computationally inexpensive and yields no ambiguous regions.
+
+In binary classification, we use the sigmoid function to model the probability that the class is one.
+
+In multiclass classification, use a softmax function to produce a probability distribution over all k classes.
+
+One of the ways to perform multi-class classification using logistic regression is to split the data into one versus rest.
+
+For that, we train a logistic regression classifier for each class I to predict the probability that the predicted class is I.
+
+During the process, gradient descent simultaneously updates all parameters for all models.
+
+The model basically predicts the class label as the most probable label.
+
+Now let's talk about instance based learning. Instance based learning is a type of learning where the algorithm memorizes training
+
+instances and makes predictions by comparing new inputs directly to these stored instances.
+
+It is also called lazy learning or memory based learning.
+
+One nearest neighbor is the simplest instance based learning algorithm.
+
+It classifies a new input by assigning it the label of the single clauses.
+
+Training example. Forming a Voronoi diagram of the instance space to classify the new data is one way to perform the one nearest neighbor algorithm.
+
+The way we generate Voronoi tessellation is as follows.
+
+Suppose we have a set of points. We drove a perpendicular bisector between every pair of points.
+
+The intersection of these bisector defines the edges of Voronoi cells.
+
+Given the boundaries of each cell, it is easy to determine where a new data point belongs.
+
+However, different metrics may yield different decision surfaces.
+
+Standard Euclidean distance metric is a generic one which yields the Voronezh tessellation on the left.
+
+When we specified the requirements for such an algorithm, we look at it from four aspects as follows.
+
+A distance metric. How many nearby neighbors to look at, a weighting function, and how to fit with local points.
+
+Here we see some examples for each aspect.
+
+K-nearest neighbors is a simple, intuitive and widely used instance based learning algorithm for classification and regression.
+
+Given a labeled training data set with instances and a query point,
+
+the algorithm computes the distance between the unlabeled data point and the center and all others.
+
+The algorithm identifies the k closest point to the unlabeled one, and assigns the class most common among the k neighbors on the chart.
+
+The label for k three is red, and the label for k seven is blue.
+
+Hence, choice of k distance, metric and weighted data points can change the result.
+
+Now let's talk about validation particularly.
+
+K fold cross validation is a model evaluation technique used to assess how well a machine learning model will generalize to unseen data.
+
+It helps avoid overfitting and gives a more reliable estimate of model performance than a simple train test.
+
+Split k fold cross-validation helps us choose hyperparameters that generalize well, not just fit on the training data.
+
+Let's say we are tuning a hyperparameter. They pick a set of candidate parameter values for each value.
+
+We run k fold cross-validation, by which we compute the average validation score.
+
+Next, we compare average scores across parameter values and finally choose the parameter with the best average score.
+
+To do that, we split our dataset into k equally sized folds.
+
+For each of the k iterations, we use k minus one for training and remaining fold for validation.
+
+We repeat this process k times, so each fold gets used once as validation.
+
+We basically average the performance metrics at the end.
+
+In this lecture, we reviewed some of the multi-class classification algorithms.
+
+In the next lecture, we will continue reviewing these algorithms focusing on support vector machines.
+

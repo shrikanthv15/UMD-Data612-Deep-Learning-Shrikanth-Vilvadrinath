@@ -1,0 +1,177 @@
+[Auto-generated transcript. Edits may have been applied for clarity.]
+How do a machine learning and deep learning and artificial intelligence relate to each other?
+
+Is one subset of the other? If so, how? Answering these questions is the key for putting them in perspective.
+
+Let's take a top down approach.
+
+Artificial intelligence AI, in short, is a broad field focused on building machines that can mimic human intelligence like reasoning,
+
+learning, planning, and understanding language. It includes everything from rule based systems to learning algorithms, machine learning, and ML.
+
+In short, is a branch of AI that allows computers to learn from data rather than being explicitly programed.
+
+An example would be instead of coding rules for spam detection and an ML model learns patterns from thousands of spam and non-spam emails.
+
+Finally, deep learning DL, in short,
+
+is a specialized subset of ML that uses neural networks with many layers to learn complex patterns in large data sets.
+
+It's inspired by the structure of the human brain and especially effective at processing unstructured data such as images, audio, and text.
+
+Although there are various definitions of ML.
+
+The one we choose is that ML is a field of AI that focuses on developing algorithms and models that learn
+
+patterns from data and make predictions or decisions without being explicitly programed for every scenario.
+
+While in traditional programing, data and program are the input to a computer which generates the output in ML,
+
+data and output are input to a computer which generates the program.
+
+When do we need ML? We need ML.
+
+When traditional programing or rule based systems aren't practical or effective, especially when dealing with large, complex or unpredictable data,
+
+among others, navigating on Mars is a good example of reinforcement learning, which is a type of ML because human expertise doesn't exist on Mars yet.
+
+A classic example of a task that requires ML is automatic recognition of handwritten digits.
+
+Some other examples include recognizing and generating patterns and detecting anomalies.
+
+Now let's talk about types of learning in ML. Supervised and unsupervised learning are two core types of ML,
+
+and understanding the difference is key to choosing the right approach for various problems.
+
+Supervised learning is when we train a model on a labeled data set, meaning each input has a known output.
+
+Our goal in supervised learning is to learn a mapping from inputs, which are features,
+
+to outputs, which are labels, so that the model can predict outputs or new data.
+
+Two kinds of problems supervised learning, mainly addresses, are classification and regression.
+
+The goal of classification is to predict a category or class label from input data.
+
+In other words, given labeled examples, it learns to assign new data to predefined classes.
+
+The output of a classification is a discrete or categorical value.
+
+An example of a classification task is given a trained model to predict if an image is a cat.
+
+The goal of regression is to predict a continuous numerical value from input data.
+
+Given examples with known numeric outcomes, the model learns the relationship to make numeric predictions.
+
+An example of a regression problem is given a trained model to predict the weight of a chick based on its age.
+
+The output would be a continuous numerical value. When we have a model,
+
+whether we use it for classification or regression depends mainly on how we define the output and configure the model's learning objective.
+
+During training, the model learns the parameters and in testing, the model predicts the output based on the learned parameters.
+
+As we mentioned earlier and supervised learning, the model learns to map the input features to output labels,
+
+whereas unsupervised learning is when the model is given unlabeled data and must find patterns or structure on its own.
+
+The goal of unsupervised learning is to discover hidden patterns, groupings, or features in the data without knowing the correct answers in advance.
+
+Some unsupervised learning tasks include anomaly detection, customer segmentation, etc.
+
+ML, particularly DL, has also changed the way pattern recognition is done in vision, speech and NLP tasks.
+
+In traditional pattern recognition, features such as sit and hog are manually extracted,
+
+whereas in DL features are learned via convolutional neural networks.
+
+Similarly, while traditional pattern recognition used manual extraction of a fixed set of features such as bag of words,
+
+DL automatically learn features such as word embeddings from the data.
+
+Now that we briefly covered machine learning and the types of problems it addresses, let's talk about deep learning.
+
+Deep learning is a technique where computers learn directly from raw data by adjusting internal parameters across many layers of a neural network,
+
+which is similar to how the human brain processes information in convolutional neural networks.
+
+The layers farther from the input are considered more abstract because of how features are gradually learned layer by layer.
+
+In other words, convolutional neural networks are designed to process data in stages where each layer extracts features from the previous one,
+
+and this creates a hierarchy of features going from low level to high level.
+
+Abstract in detail. Weights are the parameters which determine the behavior, and therefore if you want to learn the right values for them.
+
+The historical progress of the hour spends decades of research breakthroughs and rapid advances in computing power.
+
+Earlier work attributed to DL include Hubel and Wiesel's simple and complex cell architecture in 60s.
+
+Later in the 70s, Fukushima's proposed neo cognition, which was a hierarchical neural network model for pattern recognition.
+
+In the 1980s and 1990s, Yann LeCun convolutional neural networks were groundbreaking because they introduced
+
+foundational ideas that are now central to modern deep learning and computer vision.
+
+In fact, Lacan was one of the first researchers to apply convolutional layers and neural networks for image processing tasks.
+
+His calm net architecture allowed the network to exploit spatial hierarchies in images, learn local features via small receptive fields,
+
+and share weights across space, dramatically reducing the number of parameters compared to fully connected layers.
+
+Overall. Before 2012, DL was not widely used, even though it reached a competitive performance.
+
+Lacan's handwritten pattern recognition was the state of the art,
+
+which was followed by other high performance results in tasks such as face detection and scene parsing.
+
+With the ImageNet dataset, a new era has started.
+
+In fact, ImageNet data set is often called a game changer in the history of DL, especially for computer vision,
+
+because before ImageNet, datasets for image recognition were small and often limited to specific domains or classes.
+
+ImageNet contains 15 million images and 22,000 categories, which makes it a much more challenging objective in realistic benchmark.
+
+The real catalyst for deep learning breakthrough was the invention of AlexNet in 2012,
+
+which dramatically reduced error rates compared to traditional methods.
+
+This was the first major success of deep CNNs on a large scale realistic dataset.
+
+AlexNet win on ImageNet is widely credited with launching the modern deep learning revolution in computer vision.
+
+The rise of DL from an obscure niche to a dominant AI paradigm, was powered by two key forces.
+
+One. More data to train. This is because while classic ML hits a wall, deep learning thrives on large data sets to better hardware, especially GPUs.
+
+Deep learning requires huge amounts of computation, particularly during training without GPUs.
+
+Deep models like ResNet 152 would be impractical to train.
+
+In short, deep learning became prominent because big data sets gave it the fuel and GPUs gave it the engine.
+
+We can see that by comparing the number of transistors and pixels used in training in Lagoon's LeNet in 1998 versus Krasinski's AlexNet in 2012.
+
+Another way to look at how deep learning evolved over time is by looking at Gigaflops per dollar over time,
+
+and other key component, and deep learning's prominence is the improvement in algorithms such as drop out and batch normalization.
+
+Deep learning reached a brilliant performance in different applications and data sets,
+
+including speech recognition, where word error rate on switchboard went down dramatically after 2010.
+
+Deep learning has delivered brilliant,
+
+often human level or superhuman performance across a wide range of applications, which we will see in this course.
+
+This includes computer vision, natural language processing, speech and audio, autonomous vehicles and robotics,
+
+health care and life sciences, games, finance, security, and industrial and computer vision.
+
+Deep learning has excelled in many tasks such as object detection and localization.
+
+Image classification. Pose estimation. Segmentation and image captioning.
+
+In this course, we will focus on the development of deep learning models applicable to various domains.
+

@@ -1,0 +1,223 @@
+[Auto-generated transcript. Edits may have been applied for clarity.]
+In this lecture we will review classic regression models, including linear and logistic regression.
+
+Discuss overfitting and underfitting and go over regularization to address overfitting
+
+problems or fitting occurs when a model learns the training data too well,
+
+including its noise and random fluctuation, rather than just the underlying patterns.
+
+As a result, the model performs very well on the training data, but poorly on new unseen data because it doesn't generalize well.
+
+Consider a case where we fit a model Y using a high order polynomial in X, which is the red line.
+
+Is this a good fit? Do you think this will generalize to the test data?
+
+Now consider another model that is linear and fits the data A1 with noise, which form better generalizes when encountered with unseen test data.
+
+An overfitting model's predictive error decreases with the increasing model complexity on training data.
+
+However, that is not the case on test data.
+
+Once the error reaches its minimum, the higher the model complexity, the larger the error on test data.
+
+Formally consider error hypothesis H over training data versus entire distribution D of data.
+
+Hypothesis H or fetch training data.
+
+If there's an alternative hypothesis H prime such that error of h prime is greater than error of H or training data,
+
+an error of h prime is less than error of h over entire distribution D of data.
+
+The ideal range for a model that neither underfit nor overfit is called the sweet spot of generalization.
+
+It's where the model is complex enough to capture the true underlying patterns in the data,
+
+but not so complex that it starts fitting noise or random fluctuations.
+
+Bias and variance are two sources of error that impact and model's ability to generalize.
+
+High bias assumes too much about the data and leads to underfitting.
+
+In this case, the model can capture the underlying trend of the data yielding and oversimplified model and the high variance case.
+
+The model is too sensitive to training data and leads to overfitting.
+
+In this case, the model captures noise along with the signal, yielding low training but high test error.
+
+Regularization is a technique in machine learning that adds a penalty to the model's complexity during training to prevent overfitting.
+
+It encourages the model to prefer simpler solutions that generalize better to unseen data.
+
+Overfitting occurs when a model becomes too complex, fitting the noise into training data.
+
+Regularization discourages the model from fitting that noise by penalizing overly large weights or complex features.
+
+Regularization modifies the loss function, which the model tries to minimize by adding a regularization term.
+
+The objective function and ordinary least squares.
+
+Linear regression is the mean squared error MSE.
+
+In short, we add a penalty term to the loss function to discourage over the large values in the loss term in the equation,
+
+lambda is the regularization strength, which is a hyperparameter that can be tuned to find the right balance between underfitting and overfitting.
+
+Hence, large weights are penalized and the model is smoothened.
+
+Keep in mind, if you use L2 regularization in this equation, which is also known as ridge regression.
+
+By discouraging complex models, regularization reduces variance, which helps prevent overfitting as lambda increases toward infinity.
+
+The penalty term, which is the last term in the equation, begins to dominate the cost function.
+
+With that, the model minimizes the size of the leads to reduce the cost.
+
+Eventually, the model shrinks all weights towards zero.
+
+As a result, the model ignores the input features and becomes flat.
+
+This leads to underfitting because the model can no longer capture the relationship between the input features and the target variable.
+
+Let's see how the gradient is updated during optimization.
+
+In this case, gradient descent when using regularization in linear regression.
+
+The cost function is the mean squared error, where L2 regularization is added at the end.
+
+With that, a pressure is added to shrink the weights, especially when the lambda is large.
+
+We update the weights by subtracting the learning rate times regularized error.
+
+We can rewrite the gradient step by moving the regularization term to the front of the equation, where the theta j would be the common term.
+
+Now let's switch to logistic regression, which is primarily a classification algorithm despite its name.
+
+Let's review how classification is achieved based on probability.
+
+In this setting, we compute the property of the instance belonging to a particular class.
+
+Instead of just predicting the class, hence we learn to prompt u of y given x.
+
+This is different in comparison to perceptron, as perceptron does not produce probability estimates.
+
+Perceptron and other discriminative classifiers are only interested in producing a discriminative model.
+
+Remember that to prompt you of an event, being two is between 0 and 1 inclusive,
+
+and that to prompt you of an event being true or not true sums up to one.
+
+Logistic regression is a probabilistic and discriminative model used for binary classification,
+
+which can also be extended for multi-class classification.
+
+Discriminative models directly modeled decision boundary between classes.
+
+They model the probability of label Y given features x.
+
+In contrast, generative models model the joint distribution.
+
+Logistic regression models to property that a given input X belongs to class one versus class zero, where theta are the model parameters.
+
+In other words, the weights Sigma is the sigmoid function that maps any real valued number into value between 0 and 1.
+
+In logistic regression, the hypothesis output, also called the predicted probability,
+
+is interpreted as the probability that dependent variable such as cancer diagnosis is one or positive given the input, which is the tumor size.
+
+Suppose the logistic regression model outputs 0.7.
+
+This means that given the tumor size, the model predicts a 70% probability that the tumor is cancerous.
+
+One of the core assumptions of logistic regression is that the log odds,
+
+also called logit of the outcome, is a linear function of the input variables.
+
+Let's break this down. And logistic regression.
+
+If you model the proud GP that the outcome Y is one.
+
+In our previous example, cancerous given the input size, which was a tumor size.
+
+This is the sigmoid function which squashes any real valued input into the range of zero and one.
+
+The odds of an event are p over one minus p.
+
+The log odds, or logit, is the logarithm of the odds.
+
+This means that the log odds of the outcome is modeled as a linear combination of the input function.
+
+The log odds transformation ensures that the predicted probabilities stay between 0 and 1, while allowing the model to use a linear structure.
+
+In logistic regression, we assume a default threshold of 0.5 and perform binary classification by classifying our prediction as class one.
+
+If the output is 0.5 or greater. And class zero if the output is less than 0.5.
+
+As we mentioned earlier, logistic regression models the log odds as a linear function of the features.
+
+If the relationship between the input features and the log odds is non-linear, then a simple linear model might not capture the complexity.
+
+To handle this, we can transform our features into higher dimensional space using basis functions.
+
+This allows the linear logistic model to learn and nonlinear decision boundary and original input space.
+
+Now let's talk about the logistic regression objective function.
+
+Recall the model for linear regression versus the model for logistic regression.
+
+Using squared loss and logistic regression means applying it to nonlinear sigmoid function of the parameters,
+
+which can make the loss non-convex that leads to local minima and complicate optimization.
+
+By contrast, using log loss results in a convex optimization problem.
+
+Let's keep in mind convex optimization guarantees that we can efficiently and reliably find a global minimum of the loss function.
+
+That is, it has no local minima, only one global minimum as shown on the chart, and a basic search procedure.
+
+First we initialize the parameters. And second, we compute gradients and update the parameters.
+
+We repeat the second step until convergence.
+
+We stop when the change and loss or parameters is below a prescribed threshold.
+
+And logistic regression. Maximum likelihood estimation is the core statistical method used to find the best fitting parameters for the model.
+
+It is a principle where we choose the model parameters that maximize the likelihood of observing the training data.
+
+Remember and logistic regression. The model predicts probabilities, not real values.
+
+Suppose we have a data set of m examples.
+
+Assuming the data points are independent and identically distributed, the likelihood function is L of theta,
+
+which is the product of probabilities for each y given x and theta for all training samples one through M.
+
+Since y of iid sample is either 0 or 1, we can rewrite it to reflect the probabilities.
+
+Visually, take the log of the likelihood to get the log likelihood, which is easier to work with.
+
+Hence, and MLI, we want to choose the theta that maximize the log likelihood or minimize the negative log likelihood.
+
+For a single training example x y, where x is the feature vector, y is the true label, h of x is the predicted probability.
+
+The cost of this one instance is given by the log loss,
+
+which is the cross-entropy loss that when y is one, the cost is minus log h of x and one y is zero.
+
+The cost is minus log one minus h of x.
+
+You can rewrite this objective function and compare it to linear regression.
+
+We can regularized logistic regression exactly as before by adding the regularization term in the equation.
+
+Gradient descent for logistic regression is identical to linear regression.
+
+However, the form of the model is very different.
+
+This concludes our review of the linear and logistic regression.
+
+Their regularization cost functions and optimization using gradient descent.
+
+Next we will review multi-class classification.
+

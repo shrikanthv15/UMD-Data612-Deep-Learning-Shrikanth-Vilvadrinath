@@ -1,0 +1,167 @@
+[Auto-generated transcript. Edits may have been applied for clarity.]
+In this lecture, we will introduce artificial neural networks and present how they're inspired by biological ones.
+
+Let's briefly explore the structure of the human brain from the neural network standpoint.
+
+The human brain consists of about 86 billion neurons, each connected to thousands of others through synapses.
+
+Each biological neuron receives signals from other neurons via dendrites, processes these signals, and the cell body sends an output signal.
+
+If the input exceeds the threshold and learns by adjusting the strength of its connections.
+
+So intelligence in the brain emerges from the interaction of these neurons connected in complex networks.
+
+In short, and neuron is nothing more than a basic functional unit of the nervous system that transmits
+
+information through electrical and chemical signals from an artificial neural network standpoint.
+
+The human brain is like a massive, parallel, multi-layered network of interconnected neurons.
+
+An important neural function is synaptic plasticity, which is the ability of synapses to strengthen or weaken over time.
+
+This is how the brain learns. Different areas of the brain are highly specialized,
+
+meaning each region performs specific functions while still working together as an integrated system.
+
+Some areas seem to have the same function in all humans, such as the prefrontal cortex.
+
+That is for decision making, though we don't know how different functions are assigned or acquired.
+
+And the table computers are compared with the human brain using various metrics.
+
+In summary, the human brain has on the order of hundreds of billions of neurons and hundreds of trillions of synapses.
+
+Its per unit clock seems relatively slow, but because of massive parallelism and connectivity, it achieves very high operations per second estimates.
+
+A modern computer can perform many trillions of operations per second, too.
+
+But it does so differently. The brain is much more energy efficient for the computation.
+
+It does, and it's structured very differently.
+
+Inspired from the human brain. Artificial neural networks are also made up of nodes connected by links.
+
+Each link has a weight and activation level.
+
+Each node has an input, an activation function, and an output.
+
+From here on, we will drop the term artificial and just call it neural networks.
+
+Neural networks emerged from the question of.
+
+Can we build a mathematical model that mimics how neurons learn and transmit information and to human brain?
+
+They were widely used in the 80s and early 90s.
+
+However, their popularity diminished in the late 90s, and we emerged later on.
+
+A feedforward neural network consists of an input and output layer and one or more hidden layers in between them.
+
+Each layer contains a number of neurons which feed the neurons in the subsequent layer.
+
+With this layered structure, neural networks are designed to be massively parallel.
+
+However, let's keep in mind that the brain is effectively a billion times faster.
+
+Mathematically mimicking the biological behavior of the human brain, and neuron receives a number of inputs along with a bias,
+
+and checks to see if the weighted sum of inputs is greater than a threshold.
+
+If so, it assigns one to the output. Else the output is set to zero.
+
+In the example, the input x and the weight vector theta have three members.
+
+If you use a sigmoid function for activation, which receives the weighted sum of the inputs and generates an output that is between 0 and 1,
+
+the output can be set to 0 or 1 discrete based on the default threshold of 0.5 overall.
+
+And the simplest form. We can depict a neural network with a single hidden layer between an input and output layer.
+
+Here, each layer has three neurons except the output layer, which has a single neuron that generates the output as our prediction.
+
+H sub theta of x. Please note the bias units for layer two and three and to figure.
+
+And neural networks. Feed forward literally means information flows forward from inputs to hidden layers to output.
+
+Input layer units are set by some exterior function, which causes their output links to be activated at a certain level.
+
+Working forward through the network, the input of each neuron is applied to compute the weighted sum which is fed to the activation function.
+
+The activation function transforms this weighted sum into a final output, which is typically non-linear.
+
+Hence, the activation function determines whether and how strongly a neuron should fire in response to incoming signals.
+
+It introduces non-linearity into the network, allowing it to learn complex patterns and relationships that a simple linear model cannot.
+
+Let's formulate the process mathematically. Considering our simple neural network with three layers in the previous chart,
+
+let's denote a sub I to the j as the activation of unit I in layer j and theta to the
+
+j as a weight matrix controlling function mapping from layer j to layer j plus one.
+
+Would that we can formulate the activation of each unit in each layer as shown on the chart.
+
+For instance, the activation of unit one in layer two as a function of the weighted sum of inputs in addition to the bias unit, which is x zero.
+
+Hence, if a network has s sub j units and layer j and s sub j plus one units in layer j plus one,
+
+then theta to the j has dimension s sub the quantity j plus one by the quantity s sub j plus one.
+
+We can vectorize the formulation for compactness and efficiency.
+
+What that the feed forward steps include computing z which is theta times x and A, which is a function of z.
+
+More concretely, to compute z of layer two, be multiplying theta of layer one with input x.
+
+Also, to compute a of layer two, we feed z of layer two to the activation function in a cascading fashion week,
+
+and subsequently compute g and a of layer three to denote the number of layers in a neural network.
+
+We use L for the number of nodes in each layer.
+
+Use S. Please keep in mind that we don't count bias units.
+
+Typically, S0 is set to a number of input features, and S sub L minus one is set to a number of classes.
+
+In the previous examples, we saw a model with a single output.
+
+Let's consider a model with multiple outputs, such as determining if an image shows a pedestrian, car, motorcycle, or truck.
+
+To train a model with multiple outputs, we can use a one versus rest approach where each class is one hot encoded in the output.
+
+For instance, with a model trained on four classes of images of pedestrian, car, motorcycle, and truck.
+
+We can encode only the first element in the output vector to one and rest to zero if the true label is a pedestrian.
+
+Similarly, we would have the third element in the vector set to one and the rest of the elements set to zero.
+
+In the case of the motorcycle being the ground truth.
+
+In this setting, training uses n number of input x and n number of ground truth output label y.
+
+Let's consider a binary and multi-class classification example.
+
+In the case of binary classification, y would yield a value of either 0 or 1.
+
+Which means the network would have a single unit in the output layer, and the case of a multi-class classification, Y would yield k number of classes,
+
+which means that each one of the k number of units in the output layer would have a pertinent property value for that class.
+
+Suppose we have a binary classifier, which takes an image as input and determines whether it's a cat or not.
+
+The output and the final layer would generate a probability of the image being a cat,
+
+and to figure the input image of cat is correctly classified as cat because the property values greater than or equal to the default threshold of 0.5.
+
+Now let's consider a multi-class classifier, which also takes an image as input and determines the class the image belongs to the outputs,
+
+and the final layer would generate the probability of the image for each class.
+
+In the figure, the input image of Cat is correctly classified as Cat,
+
+which has the highest probability value among all classes of dog, giraffe, and cat.
+
+This lesson covered the foundation of neural networks that we will use throughout the course.
+
+Copyright 2026 University of Maryland Science Academy, All rights reserved.
+
