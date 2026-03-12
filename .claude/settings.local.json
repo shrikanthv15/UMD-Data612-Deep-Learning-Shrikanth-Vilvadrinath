@@ -18,7 +18,8 @@
       "Bash(conda activate:*)",
       "Bash(mv:*)",
       "Bash(pip list:*)",
-      "Bash(xargs:*)"
+      "Bash(xargs:*)",
+      "Bash(grep -r \"Assignment 3\\\\|assignment3\\\\|LSTM\" \"C:\\\\Data612\" --include=\"*.md\" --include=\"*.txt\" 2>/dev/null | head -20)"
     ]
   }
 }

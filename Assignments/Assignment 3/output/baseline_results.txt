@@ -1,0 +1,39 @@
+Baseline LSTM Results
+Config: hidden=32, layers=1, lr=0.01, epochs=500, batch=1, seed=42
+============================================================
+Loss:     0.6317
+Accuracy: 100.00%
+Correct:  25/25
+Target:   >80%
+Result:   PASS
+
+Step 9 -- Full Prediction Table:
+Input    | Expected   | Predicted  | Correct
+---------+------------+------------+---------
+A        | B          | B          | Yes
+B        | C          | C          | Yes
+C        | D          | D          | Yes
+D        | E          | E          | Yes
+E        | F          | F          | Yes
+F        | G          | G          | Yes
+G        | H          | H          | Yes
+H        | I          | I          | Yes
+I        | J          | J          | Yes
+J        | K          | K          | Yes
+K        | L          | L          | Yes
+L        | M          | M          | Yes
+M        | N          | N          | Yes
+N        | O          | O          | Yes
+O        | P          | P          | Yes
+P        | Q          | Q          | Yes
+Q        | R          | R          | Yes
+R        | S          | S          | Yes
+S        | T          | T          | Yes
+T        | U          | U          | Yes
+U        | V          | V          | Yes
+V        | W          | W          | Yes
+W        | X          | X          | Yes
+X        | Y          | Y          | Yes
+Y        | Z          | Z          | Yes
+
+Total: 25/25 correct (100.0%)

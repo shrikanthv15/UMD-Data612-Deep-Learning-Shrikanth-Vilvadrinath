@@ -1,0 +1,17 @@
+name: data612
+channels:
+  - defaults
+  - conda-forge
+dependencies:
+  - python=3.10
+  - numpy=1.23
+  - pandas
+  - scipy
+  - scikit-learn=1.1
+  - matplotlib
+  - statsmodels
+  - tensorflow=2.10
+  - nltk
+  - pip
+  - pip:
+    - scikeras>=0.11,<0.12
